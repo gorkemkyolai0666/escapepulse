@@ -7,10 +7,10 @@
 const GITHUB_REPO = process.env.GITHUB_REPO || 'gorkemkyolai06/escapepulse';
 
 async function main() {
-  console.log('═══════════════════════════════════════════════════════');
+  console.log('════════════════════════════════════════════════════════');
   console.log('EscapePulse Infrastructure Provisioning');
   console.log(`Repository: ${GITHUB_REPO}`);
-  console.log('═══════════════════════════════════════════════════════');
+  console.log('════════════════════════════════════════════════════════');
 
   const hasRailway = Boolean(process.env.RAILWAY_API_TOKEN);
   const hasVercelMcp = true; // Vercel MCP auth active in Cursor environment
