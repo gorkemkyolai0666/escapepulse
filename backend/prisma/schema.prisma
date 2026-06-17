@@ -1,0 +1,258 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  owner
+  manager
+  game_master
+}
+
+enum RoomTheme {
+  horror
+  mystery
+  sci_fi
+  historical
+  fantasy
+  adventure
+}
+
+enum RoomStatus {
+  available
+  in_game
+  resetting
+  maintenance
+  closed
+}
+
+enum SessionStatus {
+  recorded
+  verified
+  disputed
+}
+
+enum GameType {
+  private_group
+  corporate
+  birthday
+  date_night
+  team_building
+}
+
+enum PuzzlePriority {
+  low
+  medium
+  high
+  urgent
+}
+
+enum PuzzleStatus {
+  open
+  in_progress
+  completed
+  cancelled
+}
+
+enum ResetCategory {
+  full_reset
+  prop_check
+  clue_refresh
+  lock_repair
+  lighting
+  other
+}
+
+enum ResetStatus {
+  scheduled
+  in_progress
+  completed
+  overdue
+}
+
+enum RateCategory {
+  room_booking
+  corporate_event
+  birthday_package
+  team_building
+  peak_hour
+  other
+}
+
+enum RateStatus {
+  active
+  upcoming
+  archived
+}
+
+enum PropOrderStatus {
+  pending
+  in_progress
+  completed
+  delivered
+}
+
+model EscapeVenue {
+  id          String   @id @default(uuid())
+  name        String
+  phone       String?
+  address     String?
+  city        String?
+  state       String?
+  zipCode     String?  @map("zip_code")
+  totalRooms  Int      @default(6) @map("total_rooms")
+  timezone    String   @default("America/Chicago")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  users              User[]
+  escapeRooms        EscapeRoom[]
+  gameSessions       GameSession[]
+  puzzleMaintenance  PuzzleMaintenance[]
+  resetChecklists    ResetChecklist[]
+  rateTiers          RateTier[]
+  propOrders         PropOrder[]
+
+  @@map("escape_venues")
+}
+
+model User {
+  id            String   @id @default(uuid())
+  email         String   @unique
+  passwordHash  String   @map("password_hash")
+  firstName     String   @map("first_name")
+  lastName      String   @map("last_name")
+  role          UserRole @default(owner)
+  escapeVenueId String   @map("escape_venue_id")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  escapeVenue EscapeVenue @relation(fields: [escapeVenueId], references: [id], onDelete: Cascade)
+
+  @@map("users")
+}
+
+model EscapeRoom {
+  id              String     @id @default(uuid())
+  escapeVenueId   String     @map("escape_venue_id")
+  name            String
+  wing            String
+  theme           RoomTheme  @default(mystery)
+  puzzleMechanism String?    @map("puzzle_mechanism")
+  status          RoomStatus @default(available)
+  notes           String?
+  createdAt       DateTime   @default(now()) @map("created_at")
+  updatedAt       DateTime   @updatedAt @map("updated_at")
+
+  escapeVenue       EscapeVenue         @relation(fields: [escapeVenueId], references: [id], onDelete: Cascade)
+  gameSessions      GameSession[]
+  puzzleMaintenance PuzzleMaintenance[]
+
+  @@unique([escapeVenueId, name])
+  @@index([escapeVenueId, status])
+  @@map("escape_rooms")
+}
+
+model GameSession {
+  id             String        @id @default(uuid())
+  escapeVenueId  String        @map("escape_venue_id")
+  escapeRoomId   String        @map("escape_room_id")
+  sessionAt      DateTime      @map("session_at")
+  gameType       GameType      @default(private_group) @map("game_type")
+  cashAmount     Float         @default(0) @map("cash_amount")
+  cardAmount     Float         @default(0) @map("card_amount")
+  participants   Int           @default(0)
+  addOnRevenue   Float         @default(0) @map("add_on_revenue")
+  status         SessionStatus @default(recorded)
+  notes          String?
+  createdAt      DateTime      @default(now()) @map("created_at")
+  updatedAt      DateTime      @updatedAt @map("updated_at")
+
+  escapeVenue EscapeVenue @relation(fields: [escapeVenueId], references: [id], onDelete: Cascade)
+  escapeRoom  EscapeRoom  @relation(fields: [escapeRoomId], references: [id], onDelete: Cascade)
+
+  @@index([escapeVenueId, sessionAt])
+  @@index([escapeVenueId, status])
+  @@map("game_sessions")
+}
+
+model PuzzleMaintenance {
+  id            String         @id @default(uuid())
+  escapeVenueId String         @map("escape_venue_id")
+  escapeRoomId  String         @map("escape_room_id")
+  title         String
+  description   String?
+  reportedAt    DateTime       @map("reported_at")
+  completedAt   DateTime?      @map("completed_at")
+  priority      PuzzlePriority @default(medium)
+  status        PuzzleStatus   @default(open)
+  cost          Float?
+  notes         String?
+  createdAt     DateTime       @default(now()) @map("created_at")
+  updatedAt     DateTime       @updatedAt @map("updated_at")
+
+  escapeVenue EscapeVenue @relation(fields: [escapeVenueId], references: [id], onDelete: Cascade)
+  escapeRoom  EscapeRoom  @relation(fields: [escapeRoomId], references: [id], onDelete: Cascade)
+
+  @@index([escapeVenueId, status])
+  @@index([escapeVenueId, priority])
+  @@map("puzzle_maintenance")
+}
+
+model ResetChecklist {
+  id            String        @id @default(uuid())
+  escapeVenueId String        @map("escape_venue_id")
+  title         String
+  description   String?
+  category      ResetCategory @default(other)
+  wing          String?
+  scheduledAt   DateTime      @map("scheduled_at")
+  status        ResetStatus   @default(scheduled)
+  createdAt     DateTime      @default(now()) @map("created_at")
+  updatedAt     DateTime      @updatedAt @map("updated_at")
+
+  escapeVenue EscapeVenue @relation(fields: [escapeVenueId], references: [id], onDelete: Cascade)
+
+  @@index([escapeVenueId, scheduledAt])
+  @@map("reset_checklists")
+}
+
+model RateTier {
+  id              String       @id @default(uuid())
+  escapeVenueId   String       @map("escape_venue_id")
+  title           String
+  rateCategory    RateCategory @default(room_booking) @map("rate_category")
+  status          RateStatus   @default(active)
+  basePrice       Float        @map("base_price")
+  priceMultiplier Float        @default(1.0) @map("price_multiplier")
+  notes           String?
+  createdAt       DateTime     @default(now()) @map("created_at")
+  updatedAt       DateTime     @updatedAt @map("updated_at")
+
+  escapeVenue EscapeVenue @relation(fields: [escapeVenueId], references: [id], onDelete: Cascade)
+
+  @@index([escapeVenueId, rateCategory])
+  @@map("rate_tiers")
+}
+
+model PropOrder {
+  id            String          @id @default(uuid())
+  escapeVenueId String          @map("escape_venue_id")
+  customerName  String          @map("customer_name")
+  propCategory  String          @map("prop_category")
+  supplierName  String?         @map("supplier_name")
+  status        PropOrderStatus @default(pending)
+  price         Float           @default(0)
+  notes         String?
+  createdAt     DateTime        @default(now()) @map("created_at")
+  updatedAt     DateTime        @updatedAt @map("updated_at")
+
+  escapeVenue EscapeVenue @relation(fields: [escapeVenueId], references: [id], onDelete: Cascade)
+
+  @@index([escapeVenueId, status])
+  @@map("prop_orders")
+}
