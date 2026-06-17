@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 270 30% 96%;
+    --foreground: 270 45% 12%;
+    --card: 270 25% 98%;
+    --card-foreground: 270 45% 12%;
+    --popover: 270 25% 98%;
+    --popover-foreground: 270 45% 12%;
+    --primary: 270 55% 22%;
+    --primary-foreground: 38 90% 92%;
+    --secondary: 270 18% 90%;
+    --secondary-foreground: 270 45% 12%;
+    --muted: 270 15% 91%;
+    --muted-foreground: 270 20% 40%;
+    --accent: 38 85% 52%;
+    --accent-foreground: 270 55% 12%;
+    --destructive: 350 65% 42%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 150 45% 35%;
+    --success-foreground: 0 0% 100%;
+    --warning: 32 90% 48%;
+    --warning-foreground: 270 55% 12%;
+    --void: 270 55% 12%;
+    --candle: 38 85% 52%;
+    --fog: 220 12% 72%;
+    --crimson: 350 55% 38%;
+    --border: 270 18% 84%;
+    --input: 270 18% 84%;
+    --ring: 38 85% 52%;
+    --radius: 6px;
+  }
+
+  .dark {
+    --background: 270 45% 7%;
+    --foreground: 38 30% 92%;
+    --card: 270 40% 10%;
+    --card-foreground: 38 30% 92%;
+    --popover: 270 40% 10%;
+    --popover-foreground: 38 30% 92%;
+    --primary: 38 85% 55%;
+    --primary-foreground: 270 45% 7%;
+    --secondary: 270 30% 16%;
+    --secondary-foreground: 38 30% 92%;
+    --muted: 270 25% 14%;
+    --muted-foreground: 220 12% 62%;
+    --accent: 350 55% 45%;
+    --accent-foreground: 38 30% 92%;
+    --destructive: 350 60% 48%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 150 40% 42%;
+    --success-foreground: 270 45% 7%;
+    --warning: 32 85% 52%;
+    --warning-foreground: 270 45% 7%;
+    --void: 270 45% 7%;
+    --candle: 38 85% 55%;
+    --fog: 220 12% 55%;
+    --crimson: 350 55% 48%;
+    --border: 270 22% 18%;
+    --input: 270 22% 18%;
+    --ring: 38 85% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+  h1,
+  h2,
+  h3,
+  .font-display {
+    font-family: var(--font-cinzel), Georgia, serif;
+    @apply font-normal tracking-wide;
+  }
+}
+
+@layer components {
+  .mystery-card {
+    @apply border border-border/60 border-l-4 border-l-accent bg-card shadow-md;
+    border-radius: var(--radius);
+  }
+
+  .mystery-btn {
+    @apply font-semibold tracking-wide transition-colors;
+    border-radius: var(--radius);
+  }
+
+  .room-pill {
+    @apply px-3 py-1 text-xs font-bold uppercase tracking-widest;
+    border-radius: var(--radius);
+  }
+
+  .room-pill-available {
+    @apply bg-success/15 text-success;
+  }
+
+  .room-pill-in-game {
+    @apply bg-accent/20 text-accent;
+  }
+
+  .room-pill-resetting {
+    @apply bg-warning/15 text-warning-foreground;
+  }
+
+  .room-pill-maintenance {
+    @apply bg-destructive/15 text-destructive;
+  }
+
+  .room-pill-closed {
+    @apply bg-muted text-muted-foreground;
+  }
+}
