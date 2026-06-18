@@ -1,4 +1,4 @@
-# EscapePulse — Yol Haritası (ROADMAP)
+# ResinPulse — Yol Haritası (ROADMAP)
 
 ## Faz 1 — MVP ✅ (2026-06-17)
 
@@ -9,7 +9,7 @@
 - [x] Top makinesi bakım CRUD
 - [x] Kort bakım CRUD
 - [x] Kordon siparişi CRUD
-- [x] Fiyat kademesi CRUD
+- [x] Atölye Ücreti kademesi CRUD
 - [x] Demo hesap ve seed verisi
 - [x] CI/CD pipeline
 - [ ] Railway + Vercel deployment

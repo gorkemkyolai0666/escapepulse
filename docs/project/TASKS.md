@@ -1,4 +1,4 @@
-# EscapePulse — Görevler (TASKS)
+# ResinPulse — Görevler (TASKS)
 
 ## Tamamlanan
 

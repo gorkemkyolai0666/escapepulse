@@ -1,4 +1,4 @@
-# EscapePulse — QA Raporu (QA_REPORT)
+# ResinPulse — QA Raporu (QA_REPORT)
 
 **Tarih:** 2026-06-17  
 **Durum:** MVP testleri geçti
@@ -21,7 +21,7 @@
 | List Ball Machine Maintenance | 200 | ✅ |
 | List Court Maintenance | 200 | ✅ |
 | List Stringing Orders | 200 | ✅ |
-| List Rate Tiers | 200 | ✅ |
+| List Service Rates | 200 | ✅ |
 | Tennis Club Profile | 200 | ✅ |
 | Urgent Ball Machine Maintenance | 200 | ✅ |
 | Pending Stringing Orders | 200 | ✅ |

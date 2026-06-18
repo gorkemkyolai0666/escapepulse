@@ -1,11 +1,11 @@
 {
-  "name": "escapepulse-frontend",
+  "name": "resinpulse-frontend",
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 3016",
+    "dev": "next dev -p 3018",
     "build": "next build",
-    "start": "next start -p 3016",
+    "start": "next start -p 3018",
     "lint": "next lint"
   },
   "dependencies": {
