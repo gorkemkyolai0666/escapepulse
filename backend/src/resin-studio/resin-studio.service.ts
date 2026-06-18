@@ -7,8 +7,10 @@ export class ResinStudioService {
   constructor(private prisma: PrismaService) {}
 
   async get(resinStudioId: string) {
-    const resinStudio = await this.prisma.resinStudio.findUnique({ where: { id: resinStudioId } });
-    if (!resinStudio) throw new NotFoundException('Tenis kulubu bulunamadi');
+    const resinStudio = await this.prisma.resinStudio.findUnique({
+      where: { id: resinStudioId },
+    });
+    if (!resinStudio) throw new NotFoundException('Tenis kulübü bulunamadı');
     return resinStudio;
   }
 
