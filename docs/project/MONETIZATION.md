@@ -6,7 +6,7 @@ B2B SaaS — kart başına aylık abonelik ($3-8/kart/ay)
 
 Go-kart pistleri kart sayısına göre faturalandırılır; kullanıcı sayısı sınırsız (MVP).
 
-## Atölye Ücretlandırma
+## Atölye Ücretilandırma
 
 | Plan | Aylık | Kart | Kart Başı | Hedef |
 |------|-------|------|-----------|-------|

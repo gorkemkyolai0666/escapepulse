@@ -2,7 +2,7 @@
 
 ## Proje Özeti
 
-**ResinPulse**, ABD'deki bağımsız epoksi reçine sanat atölyeleri için istasyon envanteri, döküm planlaması, ekipman bakımı, kürlenme kontrolü ve kalıp siparişlerini yöneten B2B SaaS platformudur.
+**ResinPulse**, ABD'deki bağımsız epoksi reçine sanat atölyeleri için istasyon envanteri, döküm planlaması, ekipman bakımı, kürleme kontrolü ve kalıp siparişlerini yöneten B2B SaaS platformudur.
 
 ## Benzersizlik Boyutları
 
@@ -10,7 +10,7 @@
 |-------|-------|
 | Endüstri | Epoksi reçine sanat / el sanatları |
 | Hedef Kitle | 3-12 istasyonlu bağımsız atölyeler |
-| Problem | Döküm, kürlenme ve kalıp yönetimi kağıt/Excel ile |
+| Problem | Döküm, kürleme ve kalıp yönetimi kağıt/Excel ile |
 | İş Modeli | SaaS $5-12/istasyon/ay |
 | Tasarım | Futuristic Laboratory Glassmorphism |
 
@@ -28,7 +28,7 @@
 - İstasyon CRUD
 - Döküm partisi CRUD
 - Ekipman bakım CRUD
-- Kürlenme kontrol listesi CRUD
+- Kürleme kontrol listesi CRUD
 - Atölye ücreti CRUD
 - Kalıp siparişi CRUD
 - Demo seed verisi
