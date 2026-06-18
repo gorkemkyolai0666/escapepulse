@@ -224,8 +224,6 @@ Mandatory research documents:
 * COMPETITOR_ANALYSIS.md
 * USER_PAIN_POINTS.md
 * MONETIZATION.md
-* MVP_VALIDATION.md
-* FINAL_DOCUMENTATION.md
 
 Every important decision must be documented.
 
