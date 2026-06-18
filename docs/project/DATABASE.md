@@ -1,4 +1,4 @@
-# EscapePulse — Veritabanı (DATABASE)
+# ResinPulse — Veritabanı (DATABASE)
 
 ## PostgreSQL
 
@@ -8,14 +8,14 @@ Connection: `DATABASE_URL` environment variable
 
 | Model | Tablo | Açıklama |
 |-------|-------|----------|
-| EscapeVenue | escape_venues | Tenis tesisi profili |
+| ResinStudio | resin_studios | Tenis tesisi profili |
 | User | users | Kullanıcı hesapları |
 | Court | courts | Kort envanteri |
-| GameSession | game_sessions | Ders gelir kayıtları |
-| PuzzleMaintenance | puzzle_maintenance | Top makinesi bakım |
-| ResetChecklist | reset_checklists | Kort bakım planı |
-| PropOrder | prop_orders | Kordon siparişleri |
-| RateTier | rate_tiers | Fiyat kademeleri |
+| PourBatch | pour_batches | Ders gelir kayıtları |
+| EquipmentRepair | equipment_repair | Top makinesi bakım |
+| CuringChecklist | curing_checklists | Kort bakım planı |
+| MoldOrder | mold_orders | Kordon siparişleri |
+| WorkshopRate | workshop_rates | Atölye Ücreti kademeleri |
 
 ## Migration
 
@@ -27,9 +27,9 @@ npm run deploy       # migrate + seed + start:prod
 
 ## Seed Verisi
 
-- 1 tesis: Mystery Manor Escapes (Phoenix, AZ)
-- 1 demo kullanıcı: demo@mysterymanorescapes.com
-- 8 kort (kil, sert, çim, kapalı)
+- 1 tesis: Claywheel Resin Studio (Phoenix, AZ)
+- 1 demo kullanıcı: demo@iridescentpourstudio.com
+- 8 kort (kalıp, sert, çim, kapalı)
 - 2 ders oturumu
 - 2 top makinesi bakım kaydı
 - 2 kort bakım planı

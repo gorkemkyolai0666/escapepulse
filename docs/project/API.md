@@ -1,4 +1,4 @@
-# EscapePulse — API (API)
+# ResinPulse — API (API)
 
 Base URL: `{NEXT_PUBLIC_API_URL}` (production: Railway backend URL + `/api`)
 
@@ -36,53 +36,53 @@ Base URL: `{NEXT_PUBLIC_API_URL}` (production: Railway backend URL + `/api`)
 
 | Method | Endpoint | Auth | Status |
 |--------|----------|------|--------|
-| GET | /api/game-sessions | Yes | 200 |
-| GET | /api/game-sessions/:id | Yes | 200 |
-| POST | /api/game-sessions | Yes | 201 |
-| PATCH | /api/game-sessions/:id | Yes | 200 |
-| DELETE | /api/game-sessions/:id | Yes | 200 |
+| GET | /api/pour-batches | Yes | 200 |
+| GET | /api/pour-batches/:id | Yes | 200 |
+| POST | /api/pour-batches | Yes | 201 |
+| PATCH | /api/pour-batches/:id | Yes | 200 |
+| DELETE | /api/pour-batches/:id | Yes | 200 |
 
 ## Ball Machine Maintenance
 
 | Method | Endpoint | Auth | Status |
 |--------|----------|------|--------|
-| GET | /api/puzzle-maintenance | Yes | 200 |
-| GET | /api/puzzle-maintenance/urgent | Yes | 200 |
-| GET | /api/puzzle-maintenance/:id | Yes | 200 |
-| POST | /api/puzzle-maintenance | Yes | 201 |
-| PATCH | /api/puzzle-maintenance/:id | Yes | 200 |
-| DELETE | /api/puzzle-maintenance/:id | Yes | 200 |
+| GET | /api/equipment-repairs | Yes | 200 |
+| GET | /api/equipment-repairs/urgent | Yes | 200 |
+| GET | /api/equipment-repairs/:id | Yes | 200 |
+| POST | /api/equipment-repairs | Yes | 201 |
+| PATCH | /api/equipment-repairs/:id | Yes | 200 |
+| DELETE | /api/equipment-repairs/:id | Yes | 200 |
 
 ## Court Maintenance
 
 | Method | Endpoint | Auth | Status |
 |--------|----------|------|--------|
-| GET | /api/reset-checklists | Yes | 200 |
-| GET | /api/reset-checklists/:id | Yes | 200 |
-| POST | /api/reset-checklists | Yes | 201 |
-| PATCH | /api/reset-checklists/:id | Yes | 200 |
-| DELETE | /api/reset-checklists/:id | Yes | 200 |
+| GET | /api/curing-checklists | Yes | 200 |
+| GET | /api/curing-checklists/:id | Yes | 200 |
+| POST | /api/curing-checklists | Yes | 201 |
+| PATCH | /api/curing-checklists/:id | Yes | 200 |
+| DELETE | /api/curing-checklists/:id | Yes | 200 |
 
 ## Stringing Orders
 
 | Method | Endpoint | Auth | Status |
 |--------|----------|------|--------|
-| GET | /api/prop-orders | Yes | 200 |
-| GET | /api/prop-orders/pending | Yes | 200 |
-| GET | /api/prop-orders/:id | Yes | 200 |
-| POST | /api/prop-orders | Yes | 201 |
-| PATCH | /api/prop-orders/:id | Yes | 200 |
-| DELETE | /api/prop-orders/:id | Yes | 200 |
+| GET | /api/mold-orders | Yes | 200 |
+| GET | /api/mold-orders/pending | Yes | 200 |
+| GET | /api/mold-orders/:id | Yes | 200 |
+| POST | /api/mold-orders | Yes | 201 |
+| PATCH | /api/mold-orders/:id | Yes | 200 |
+| DELETE | /api/mold-orders/:id | Yes | 200 |
 
 ## Rate Tiers
 
 | Method | Endpoint | Auth | Status |
 |--------|----------|------|--------|
-| GET | /api/rate-tiers | Yes | 200 |
-| GET | /api/rate-tiers/:id | Yes | 200 |
-| POST | /api/rate-tiers | Yes | 201 |
-| PATCH | /api/rate-tiers/:id | Yes | 200 |
-| DELETE | /api/rate-tiers/:id | Yes | 200 |
+| GET | /api/workshop-rates | Yes | 200 |
+| GET | /api/workshop-rates/:id | Yes | 200 |
+| POST | /api/workshop-rates | Yes | 201 |
+| PATCH | /api/workshop-rates/:id | Yes | 200 |
+| DELETE | /api/workshop-rates/:id | Yes | 200 |
 
 ## Dashboard
 

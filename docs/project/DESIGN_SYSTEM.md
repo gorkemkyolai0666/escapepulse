@@ -1,56 +1,45 @@
-# EscapePulse — Tasarım Sistemi (DESIGN_SYSTEM)
+# ResinPulse — Tasarım Sistemi
 
-**Yön:** Clay Court Editorial  
-**Oluşturma:** 2026-06-17
+## Tasarım Yönü: Futuristic Laboratory Glassmorphism
+
+Epoksi reçine atölyelerinin laboratuvar estetiğini yansıtan, cam efektli ve futuristik bir arayüz.
 
 ## Renk Paleti
 
-| Token | Hex | Kullanım |
-|-------|-----|----------|
-| Terracotta Clay | #C4662A | Primary accent, CTA buttons |
-| Court Green | #2D5A27 | Success states, available courts |
-| Chalk White | #FAFAF5 | Background (light mode) |
-| Baseline Navy | #1E3A5F | Primary text, headers |
-| Warm Gray | #8B8178 | Muted text |
+| Token | Light | Dark | Kullanım |
+|-------|-------|------|----------|
+| primary | #1A1B4B (indigo) | #00D4FF (cyan) | Başlıklar, vurgu |
+| accent | #00D4FF (cyan) | #00D4FF | CTA, aktif nav |
+| iris | #7B2D8E (violet) | #9B4DCA | Gradient, ikincil vurgu |
+| background | #F8F5FF (pearl) | #0D0E2A | Sayfa zemini |
+| card | rgba(255,255,255,0.7) | rgba(26,27,75,0.6) | Glass kartlar |
 
 ## Tipografi
 
-| Rol | Font | Weight |
-|-----|------|--------|
-| Display / Headings | Libre Baskerville | 400, 700 |
-| Body / UI | Source Sans 3 | 400, 600, 700 |
-| Mono / Stats | Source Sans 3 | 600 |
+- **Display:** Space Grotesk — başlıklar, marka adı
+- **Body:** IBM Plex Sans — gövde metni, form etiketleri
 
 ## Spacing Scale
 
-4px base: 4, 8, 12, 16, 24, 32, 48, 64
+4px taban: 4, 8, 12, 16, 24, 32, 48, 64
 
 ## Border Radius
 
-- Default: 2px (`--radius: 2px`)
-- Cards: 2px with 1px court-line border
+- `--radius: 20px` — glass kartlar ve butonlar
+- `rounded-2xl` — navigasyon öğeleri
 
 ## Navigasyon
 
-- **Yapı:** Üst sekme navigasyon (horizontal tabs)
-- **Aktif durum:** Terracotta alt çizgi + clay arka plan
-- **Mobil:** Yatay scroll tabs
+Üst cam navigasyon çubuğu (TopGlassNav) — GlazePulse yan rail'den farklı.
 
 ## Bileşen Dili
 
-- `.clay-card` — 1px border, 2px radius, court-line left accent
-- `.court-pill-available` — yeşil arka plan
-- `.court-pill-in_game` — terracotta arka plan
-- `.court-pill-maintenance` — amber arka plan
-- `.court-pill-closed` — gri arka plan
+- `glass-card` — backdrop-blur + yarı saydam arka plan
+- `resin-btn` — 20px radius butonlar
+- Gradient logo ikonu (accent → iris)
 
-## Farklılaşma
+## Erişilebilirlik
 
-| Özellik | EscapePulse | KartPulse | BayPulse |
-|---------|----------|-----------|----------|
-| Navigasyon | Üst tabs | Sol sidebar | Editorial header |
-| Renk | Terracotta/yeşil | Siyah/kırmızı/sarı | Yeşil/krem |
-| Font | Libre Baskerville | Bebas Neue | Playfair |
-| Radius | 2px | 0px | 8px |
-
-Benzerlik skoru: <40% — benzersizlik kriteri karşılandı.
+- WCAG AA kontrast oranları
+- `aria-label` tema ve çıkış butonlarında
+- `aria-current="page"` aktif nav linklerinde

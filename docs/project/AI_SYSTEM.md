@@ -1,8 +1,8 @@
-# EscapePulse — AI Sistemi (AI_SYSTEM)
+# ResinPulse — AI Sistemi (AI_SYSTEM)
 
 ## Durum
 
-EscapePulse MVP'de AI özelliği bulunmamaktadır. Gelecek fazlarda değerlendirilecek özellikler:
+ResinPulse MVP'de AI özelliği bulunmamaktadır. Gelecek fazlarda değerlendirilecek özellikler:
 
 - Kort kullanım tahmin modeli (yoğun saat optimizasyonu)
 - Top makinesi bakım anomali tespiti

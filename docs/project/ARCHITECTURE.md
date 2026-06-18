@@ -1,4 +1,4 @@
-# EscapePulse — Mimari (ARCHITECTURE)
+# ResinPulse — Mimari (ARCHITECTURE)
 
 ## Genel Bakış
 
@@ -30,11 +30,11 @@
 - `health` — GET /api/health
 - `tennis-club` — Tesis profili
 - `courts` — Kort envanteri
-- `game-sessions` — Ders gelir kayıtları
-- `puzzle-maintenance` — Top makinesi bakım
-- `reset-checklists` — Kort bakım planı
-- `prop-orders` — Kordon siparişleri
-- `rate-tiers` — Fiyat kademeleri
+- `pour-batches` — Ders gelir kayıtları
+- `equipment-repairs` — Top makinesi bakım
+- `curing-checklists` — Kort bakım planı
+- `mold-orders` — Kordon siparişleri
+- `workshop-rates` — Atölye Ücreti kademeleri
 - `dashboard` — İstatistikler
 
 ## Güvenlik

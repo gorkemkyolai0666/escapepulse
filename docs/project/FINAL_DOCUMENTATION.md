@@ -1,56 +1,49 @@
-# EscapePulse — Final Dokümantasyon
+# ResinPulse — Final Documentation
 
-**Proje:** EscapePulse  
-**Tamamlanma:** 2026-06-17  
-**GitHub:** https://github.com/gorkemkyolai06/escapepulse
+## Proje Özeti
 
-## Özet
+**ResinPulse**, ABD'deki bağımsız epoksi reçine sanat atölyeleri için istasyon envanteri, döküm planlaması, ekipman bakımı, kürlenme kontrolü ve kalıp siparişlerini yöneten B2B SaaS platformudur.
 
-EscapePulse, ABD'deki bağımsız tenis kulüpleri için kort envanteri, ders geliri, top makinesi bakımı, kort bakım planı, kordon siparişleri ve fiyat kademesi yönetimi sunan B2B SaaS platformudur.
+## Benzersizlik Boyutları
 
-## Benzersizlik
-
-| Boyut | EscapePulse | En Yakın Proje |
-|-------|----------|----------------|
-| Sektör | Tenis tesisi | BayPulse (indoor golf) |
-| Varlık | Kort / top makinesi | Bay / simulator |
-| İş akışı | Kordon siparişleri, ders geliri | Oturum geliri, bay bakımı |
-| Tasarım | Clay Court Editorial | Velocity Pit (KartPulse) |
-
-## Demo Hesabı
-
-- E-posta: demo@mysterymanorescapes.com
-- Şifre: demo123456
+| Boyut | Değer |
+|-------|-------|
+| Endüstri | Epoksi reçine sanat / el sanatları |
+| Hedef Kitle | 3-12 istasyonlu bağımsız atölyeler |
+| Problem | Döküm, kürlenme ve kalıp yönetimi kağıt/Excel ile |
+| İş Modeli | SaaS $5-12/istasyon/ay |
+| Tasarım | Futuristic Laboratory Glassmorphism |
 
 ## Teknik Stack
 
-- Frontend: Next.js 14, TypeScript, Tailwind CSS, shadcn/ui
-- Backend: NestJS 10, Prisma 5, PostgreSQL 16
-- CI: GitHub Actions
-- CD: Railway (backend) + Vercel (frontend) — bekliyor
+- **Frontend:** Next.js, TypeScript, Tailwind CSS, shadcn/ui
+- **Backend:** NestJS, Prisma, PostgreSQL
+- **CI/CD:** GitHub Actions
+- **Deploy:** Railway (backend), Vercel (frontend)
 
-## Modüller
+## Tamamlanan MVP
 
-1. Kortlar (8 demo kort)
-2. Ders Oturumları
-3. Top Makinesi Bakımı
-4. Kort Bakımı
-5. Kordon Siparişleri
-6. Fiyat Kademeleri
+- Kimlik doğrulama (JWT)
+- Dashboard istatistikleri
+- İstasyon CRUD
+- Döküm partisi CRUD
+- Ekipman bakım CRUD
+- Kürlenme kontrol listesi CRUD
+- Atölye ücreti CRUD
+- Kalıp siparişi CRUD
+- Demo seed verisi
+- Integration test script
+- Provisioning scriptleri
 
-## Test Sonuçları
+## Demo
 
-- Unit tests: 1 suite passed
-- Integration tests: 18/18 passed
-- Frontend build: success
+- **E-posta:** demo@iridescentpourstudio.com
+- **Şifre:** demo123456
 
-## Deployment Durumu
+## Repository
 
-⏳ Railway ve Vercel GitHub native entegrasyonu henüz yapılandırılmadı. RAILWAY_API_TOKEN ortam değişkeni mevcut değil.
+https://github.com/gorkemkyolai0666/escapepulse
 
-## Kararlar
+## Tarih
 
-1. **Tasarım:** Clay Court Editorial — terracotta/yeşil palet, üst sekme navigasyon (sidebar yerine)
-2. **Domain:** Tennis-specific modeller (Court, GameSession, PropOrder)
-3. **Portlar:** 3016/4016/5456 (diğer projelerden farklı)
-4. **Deployment:** GitHub native integration tercih edildi (CLI yasak)
+2026-06-18
