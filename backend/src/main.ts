@@ -22,9 +22,9 @@ async function bootstrap() {
     }),
   );
 
-  const port = process.env.PORT || 4016;
+  const port = process.env.PORT || 4018;
   await app.listen(port);
-  console.log(`EscapePulse API running on port ${port}`);
+  console.log(`ResinPulse API running on port ${port}`);
 }
 
 bootstrap();

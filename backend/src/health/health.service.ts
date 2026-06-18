@@ -10,14 +10,14 @@ export class HealthService {
       await this.prisma.$queryRaw`SELECT 1`;
       return {
         status: 'ok',
-        service: 'EscapePulse API',
+        service: 'ResinPulse API',
         database: 'connected',
         timestamp: new Date().toISOString(),
       };
     } catch {
       return {
         status: 'error',
-        service: 'EscapePulse API',
+        service: 'ResinPulse API',
         database: 'disconnected',
         timestamp: new Date().toISOString(),
       };
