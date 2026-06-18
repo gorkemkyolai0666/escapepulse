@@ -1,51 +1,51 @@
 import Link from 'next/link';
-import { KeyRound, DoorOpen, Users, Puzzle, ClipboardCheck, Package, ArrowRight } from 'lucide-react';
+import { Beaker, Layers, Wrench, Thermometer, Package, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const features = [
   {
-    icon: DoorOpen,
-    title: 'Kaçış Odası Envanteri',
-    description: 'Korku, gizem, bilim kurgu ve macera temalı odalarınızı kanat bazında takip edin.',
+    icon: Beaker,
+    title: 'İstasyon Envanteri',
+    description: 'Standart, premium, vakum ve basınç potu istasyonlarınızı bölge bazında takip edin.',
   },
   {
-    icon: Users,
-    title: 'Oyun Oturumları',
-    description: 'Günlük oyun geliri, katılımcı sayısı ve oturum kayıtlarını tek panelden izleyin.',
+    icon: Layers,
+    title: 'Döküm Partileri',
+    description: 'Nehir masası, coaster ve takı dökümlerini sertleştirici oranı ve gelir kayıtlarıyla yönetin.',
   },
   {
-    icon: Puzzle,
-    title: 'Bulmaca Bakımı',
-    description: 'Kilit, mekanizma ve prop arızalarını öncelik sırasıyla yönetin.',
+    icon: Wrench,
+    title: 'Ekipman Bakımı',
+    description: 'Vakum pompası, karıştırıcı ve nem kontrol arızalarını öncelik sırasıyla takip edin.',
   },
   {
-    icon: ClipboardCheck,
-    title: 'Sıfırlama Kontrol Listeleri',
-    description: 'Tam sıfırlama, prop kontrolü ve ipucu yenileme planlarını takip edin.',
+    icon: Thermometer,
+    title: 'Kürleme Kontrolleri',
+    description: 'Nem oranı, sıcaklık logları ve pigment karışımlarını planlayın.',
   },
   {
     icon: Package,
-    title: 'Prop Siparişleri',
-    description: 'Kilit seti, şifre çarkı ve dekor siparişlerini durum bazında yönetin.',
+    title: 'Kalıp Siparişleri',
+    description: 'Özel kalıp siparişlerini, tedarikçileri ve teslim durumlarını yönetin.',
   },
 ];
 
 export default function LandingPage() {
   return (
     <div className="min-h-screen bg-background">
-      <header className="border-b border-border/80 bg-void text-candle mystery-nav-border">
+      <header className="border-b border-border/40 bg-card/60 backdrop-blur-xl">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-5 sm:px-6">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center bg-accent text-accent-foreground">
-              <KeyRound className="h-5 w-5" strokeWidth={2} />
+            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-accent to-iris text-accent-foreground shadow-lg shadow-accent/20">
+              <Beaker className="h-5 w-5" strokeWidth={2} />
             </div>
-            <span className="font-display text-2xl text-candle">EscapePulse</span>
+            <span className="font-display text-2xl text-primary">ResinPulse</span>
           </div>
           <div className="flex items-center gap-2">
-            <Button variant="ghost" asChild className="text-candle/80 hover:bg-candle/10 hover:text-candle">
+            <Button variant="ghost" asChild>
               <Link href="/login">Giriş Yap</Link>
             </Button>
-            <Button asChild className="mystery-btn bg-accent text-accent-foreground hover:bg-accent/90">
+            <Button asChild className="resin-btn bg-accent text-accent-foreground hover:bg-accent/90">
               <Link href="/register">Ücretsiz Başla</Link>
             </Button>
           </div>
@@ -53,54 +53,56 @@ export default function LandingPage() {
       </header>
 
       <main>
-        <section className="relative overflow-hidden border-b border-border/60 bg-gradient-to-br from-void/10 via-background to-accent/5">
-          <div className="absolute inset-0 opacity-[0.04]" style={{
-            backgroundImage: 'repeating-linear-gradient(90deg, hsl(var(--accent)) 0, hsl(var(--accent)) 1px, transparent 1px, transparent 80px)',
-          }} />
-          <div className="relative mx-auto max-w-6xl px-4 py-20 sm:px-6">
-            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-accent">
-              Kaçış Odası Tesisi Operasyon Yönetimi
+        <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:py-28">
+          <div className="max-w-2xl">
+            <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-accent">
+              Epoksi Reçine Atölyesi Operasyonları
             </p>
-            <h1 className="font-display max-w-2xl text-4xl leading-tight text-primary md:text-5xl">
-              Odalarınızı, oyun oturumlarınızı ve tesis gelirinizi tek platformda yönetin
+            <h1 className="font-display text-4xl leading-tight text-primary sm:text-5xl lg:text-6xl">
+              Dökümlerinizi, kürlemelerinizi ve kalıplarınızı tek laboratuvarda yönetin
             </h1>
-            <p className="mt-6 max-w-xl text-lg text-muted-foreground">
-              Kaçış odası tesisleri için oda envanteri, oyun oturumu takibi,
-              bulmaca bakımı, sıfırlama kontrol listeleri, prop siparişleri ve fiyat kademesi yönetimi.
+            <p className="mt-6 text-lg text-muted-foreground">
+              Bağımsız epoksi reçine atölyeleri için istasyon envanteri, döküm planlaması, ekipman bakımı ve
+              kürleme kontrolü — kağıt defterlerin yerini alan modern bir çözüm.
             </p>
-            <div className="mt-10 flex flex-wrap gap-3">
-              <Button asChild size="lg" className="mystery-btn">
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button asChild size="lg" className="resin-btn bg-accent text-accent-foreground hover:bg-accent/90">
                 <Link href="/register">
-                  Hemen Başla
+                  Demo Hesabıyla Başla
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
-              <Button asChild variant="outline" size="lg">
-                <Link href="/login">Demo Hesabıyla Giriş</Link>
+              <Button asChild variant="outline" size="lg" className="resin-btn">
+                <Link href="/login">Giriş Yap</Link>
               </Button>
             </div>
-            <p className="mt-4 font-mono text-xs text-muted-foreground">
-              Demo: demo@mysterymanorescapes.com / demo123456
-            </p>
           </div>
         </section>
 
-        <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-          <h2 className="font-display mb-8 text-2xl text-primary">Özellikler</h2>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {features.map((feature) => {
-              const Icon = feature.icon;
-              return (
-                <div key={feature.title} className="mystery-card p-6">
-                  <Icon className="mb-4 h-6 w-6 text-accent" strokeWidth={1.5} />
-                  <h3 className="font-semibold">{feature.title}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground">{feature.description}</p>
-                </div>
-              );
-            })}
+        <section className="border-t border-border/40 py-16">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6">
+            <h2 className="font-display text-2xl text-primary">Atölyeniz için her şey</h2>
+            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {features.map((feature) => {
+                const Icon = feature.icon;
+                return (
+                  <div key={feature.title} className="glass-card p-6">
+                    <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-2xl bg-accent/10 text-accent">
+                      <Icon className="h-5 w-5" />
+                    </div>
+                    <h3 className="font-display text-lg text-primary">{feature.title}</h3>
+                    <p className="mt-2 text-sm text-muted-foreground">{feature.description}</p>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </section>
       </main>
+
+      <footer className="border-t border-border/40 py-8 text-center text-sm text-muted-foreground">
+        © {new Date().getFullYear()} ResinPulse — Epoksi Reçine Atölyesi Yönetim Platformu
+      </footer>
     </div>
   );
 }

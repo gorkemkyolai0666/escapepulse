@@ -1,32 +1,32 @@
 import type { Metadata } from 'next';
-import { Cinzel, IBM_Plex_Sans } from 'next/font/google';
+import { Space_Grotesk, IBM_Plex_Sans } from 'next/font/google';
 import { AuthProvider } from '@/lib/auth-context';
 import { ThemeProvider } from '@/lib/theme-context';
 import './globals.css';
 
-const cinzel = Cinzel({
+const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
-  variable: '--font-cinzel',
+  variable: '--font-display',
   display: 'swap',
 });
 
 const ibmPlex = IBM_Plex_Sans({
   weight: ['400', '500', '600', '700'],
   subsets: ['latin'],
-  variable: '--font-ibm-plex',
+  variable: '--font-sans',
   display: 'swap',
 });
 
 export const metadata: Metadata = {
-  title: 'EscapePulse - Kaçış Odası Operasyon Yönetimi',
+  title: 'ResinPulse — Epoksi Reçine Atölyesi Yönetimi',
   description:
-    'Oda envanteri, oyun oturumları, bulmaca bakımı, sıfırlama kontrol listeleri, prop siparişleri ve fiyat kademeleri yönetim platformu',
+    'İstasyon envanteri, döküm partileri, ekipman bakımı, kürleme kontrolleri, kalıp siparişleri ve atölye ücretleri yönetim platformu',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="tr" suppressHydrationWarning>
-      <body className={`${cinzel.variable} ${ibmPlex.variable} font-sans`}>
+      <body className={`${spaceGrotesk.variable} ${ibmPlex.variable} font-sans`}>
         <ThemeProvider>
           <AuthProvider>{children}</AuthProvider>
         </ThemeProvider>

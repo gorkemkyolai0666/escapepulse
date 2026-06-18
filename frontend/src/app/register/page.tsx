@@ -18,7 +18,7 @@ export default function RegisterPage() {
     password: '',
     firstName: '',
     lastName: '',
-    escapeVenueName: '',
+    resinStudioName: '',
     phone: '',
     city: '',
     state: '',
@@ -51,9 +51,9 @@ export default function RegisterPage() {
         <h1 className="font-display text-3xl text-primary">Tesis Kaydı</h1>
       </div>
 
-      <Card className="mystery-card w-full max-w-lg">
+      <Card className="workstation-card w-full max-w-lg">
         <CardHeader>
-          <CardTitle className="font-display text-2xl">Yeni Kaçış Odası Tesisi Oluştur</CardTitle>
+          <CardTitle className="font-display text-2xl">Yeni Terzi Atölyesi Tesisi Oluştur</CardTitle>
           <CardDescription>14 gün ücretsiz deneme ile başlayın</CardDescription>
         </CardHeader>
         <CardContent>
@@ -74,13 +74,13 @@ export default function RegisterPage() {
               </div>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="escapeVenueName">Tesis Adı</Label>
+              <Label htmlFor="resinStudioName">Tesis Adı</Label>
               <Input
-                id="escapeVenueName"
-                value={form.escapeVenueName}
-                onChange={(e) => update('escapeVenueName', e.target.value)}
+                id="resinStudioName"
+                value={form.resinStudioName}
+                onChange={(e) => update('resinStudioName', e.target.value)}
                 required
-                placeholder="Mystery Manor Escapes"
+                placeholder="Claywheel Resin Studio"
               />
             </div>
             <div className="space-y-2">
@@ -112,7 +112,7 @@ export default function RegisterPage() {
                 <Input id="phone" value={form.phone} onChange={(e) => update('phone', e.target.value)} />
               </div>
             </div>
-            <Button type="submit" className="mystery-btn w-full" disabled={loading}>
+            <Button type="submit" className="workstation-btn w-full" disabled={loading}>
               {loading ? 'Kayıt yapılıyor...' : 'Kayıt Ol'}
             </Button>
           </form>

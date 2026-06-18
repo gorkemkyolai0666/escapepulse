@@ -38,11 +38,11 @@ export default function LoginPage() {
         <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center border-t-2 border-accent bg-void text-candle shadow-sm">
           <KeyRound className="h-8 w-8 text-candle" strokeWidth={2} />
         </div>
-        <h1 className="font-display text-4xl text-primary">EscapePulse</h1>
-        <p className="mt-1 text-muted-foreground">Kaçış odası tesisi operasyon yönetimi</p>
+        <h1 className="font-display text-4xl text-primary">ResinPulse</h1>
+        <p className="mt-1 text-muted-foreground">Terzi atölyesi tesisi operasyon yönetimi</p>
       </div>
 
-      <Card className="mystery-card w-full max-w-md">
+      <Card className="workstation-card w-full max-w-md">
         <CardHeader>
           <CardTitle className="font-display text-2xl">Hoş Geldiniz</CardTitle>
           <CardDescription>Tesis operasyonlarınızı yönetmek için giriş yapın</CardDescription>
@@ -59,7 +59,7 @@ export default function LoginPage() {
               <Input
                 id="email"
                 type="email"
-                placeholder="demo@mysterymanorescapes.com"
+                placeholder="demo@iridescentpourstudio.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -78,9 +78,9 @@ export default function LoginPage() {
               />
             </div>
             <p className="font-mono text-xs text-muted-foreground">
-              Demo: demo@mysterymanorescapes.com / demo123456
+              Demo: demo@iridescentpourstudio.com / demo123456
             </p>
-            <Button type="submit" className="mystery-btn w-full" disabled={loading}>
+            <Button type="submit" className="workstation-btn w-full" disabled={loading}>
               {loading ? 'Giriş yapılıyor...' : 'Giriş Yap'}
             </Button>
           </form>

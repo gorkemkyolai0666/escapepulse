@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/lib/auth-context';
-import { SidebarNav } from '@/components/sidebar-nav';
+import { TopGlassNav } from '@/components/top-glass-nav';
 import { LoadingSpinner } from '@/components/states';
 
 export function AppLayout({ children }: { children: React.ReactNode }) {
@@ -21,10 +21,8 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-screen bg-background">
-      <SidebarNav />
-      <main className="min-h-screen pl-[4.5rem] lg:pl-56">
-        <div className="mx-auto max-w-7xl p-6 lg:p-8">{children}</div>
-      </main>
+      <TopGlassNav />
+      <main className="mx-auto max-w-7xl p-4 lg:p-8">{children}</main>
     </div>
   );
 }

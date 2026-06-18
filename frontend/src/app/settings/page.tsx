@@ -10,20 +10,20 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useAuth } from '@/lib/auth-context';
 import { api } from '@/lib/api';
 
-interface EscapeVenueProfile {
+interface ResinStudioProfile {
   name: string;
   phone?: string;
   address?: string;
   city?: string;
   state?: string;
   zipCode?: string;
-  totalRooms: number;
+  totalWorkstations: number;
   timezone: string;
 }
 
 export default function SettingsPage() {
   const { token } = useAuth();
-  const [venue, setVenue] = useState<EscapeVenueProfile | null>(null);
+  const [venue, setVenue] = useState<ResinStudioProfile | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -33,9 +33,9 @@ export default function SettingsPage() {
     if (!token) return;
     setLoading(true);
     setError(false);
-    api.escapeVenue
+    api.resinStudio
       .get(token)
-      .then((data) => setVenue(data as EscapeVenueProfile))
+      .then((data) => setVenue(data as ResinStudioProfile))
       .catch(() => setError(true))
       .finally(() => setLoading(false));
   };
@@ -50,7 +50,7 @@ export default function SettingsPage() {
     setSaving(true);
     setSuccess(false);
     try {
-      await api.escapeVenue.update(token, venue as unknown as Record<string, unknown>);
+      await api.resinStudio.update(token, venue as unknown as Record<string, unknown>);
       setSuccess(true);
     } catch {
       setError(true);
@@ -64,13 +64,13 @@ export default function SettingsPage() {
       <div className="mx-auto max-w-2xl space-y-6">
         <div>
           <h1 className="font-display text-3xl text-primary">Ayarlar</h1>
-          <p className="text-muted-foreground">Kaçış odası tesisi profil bilgileri</p>
+          <p className="text-muted-foreground">Terzi atölyesi tesisi profil bilgileri</p>
         </div>
 
         {loading && <LoadingSpinner />}
         {error && !venue && <ErrorState onRetry={load} />}
         {venue && !loading && (
-          <Card className="mystery-card">
+          <Card className="workstation-card">
             <CardHeader>
               <CardTitle className="font-display">Tesis Profili</CardTitle>
             </CardHeader>
@@ -133,17 +133,17 @@ export default function SettingsPage() {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="totalRooms">Toplam Oda Sayısı</Label>
+                  <Label htmlFor="totalWorkstations">Toplam Oda Sayısı</Label>
                   <Input
-                    id="totalRooms"
+                    id="totalWorkstations"
                     type="number"
-                    value={venue.totalRooms}
+                    value={venue.totalWorkstations}
                     onChange={(e) =>
-                      setVenue({ ...venue, totalRooms: parseInt(e.target.value, 10) || 0 })
+                      setVenue({ ...venue, totalWorkstations: parseInt(e.target.value, 10) || 0 })
                     }
                   />
                 </div>
-                <Button type="submit" disabled={saving} className="mystery-btn">
+                <Button type="submit" disabled={saving} className="workstation-btn">
                   {saving ? 'Kaydediliyor...' : 'Kaydet'}
                 </Button>
               </form>
