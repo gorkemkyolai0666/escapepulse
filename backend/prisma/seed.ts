@@ -3,27 +3,27 @@ import * as bcrypt from 'bcrypt';
 
 const prisma = new PrismaClient();
 
-const ESCAPE_VENUE_ID = '00000000-0000-0000-0000-000000000001';
+const STUDIO_ID = '00000000-0000-0000-0000-000000000001';
 
 async function main() {
   const passwordHash = await bcrypt.hash('demo123456', 12);
 
-  await prisma.escapeVenue.upsert({
-    where: { id: ESCAPE_VENUE_ID },
+  await prisma.resinStudio.upsert({
+    where: { id: STUDIO_ID },
     update: {},
     create: {
-      id: ESCAPE_VENUE_ID,
-      name: 'Mystery Manor Escapes',
+      id: STUDIO_ID,
+      name: 'Iridescent Pour Studio',
       phone: '+13125550142',
-      address: '88 Shadow Lane',
+      address: '2840 North Milwaukee Avenue',
       city: 'Chicago',
       state: 'IL',
-      zipCode: '60614',
-      totalRooms: 6,
+      zipCode: '60618',
+      totalWorkstations: 6,
       timezone: 'America/Chicago',
       users: {
         create: {
-          email: 'demo@mysterymanorescapes.com',
+          email: 'demo@iridescentpourstudio.com',
           passwordHash,
           firstName: 'Elif',
           lastName: 'Kara',
@@ -33,189 +33,229 @@ async function main() {
     },
   });
 
-  const roomData = [
-    { id: '00000000-0000-0000-0000-000000000101', name: 'The Crypt', wing: 'Basement Wing', theme: 'horror' as const, puzzleMechanism: 'RFID lock chain + pressure plates', status: 'available' as const },
-    { id: '00000000-0000-0000-0000-000000000102', name: 'Vanishing Study', wing: 'Basement Wing', theme: 'mystery' as const, puzzleMechanism: 'Magnetic compass + cipher wheel', status: 'in_game' as const },
-    { id: '00000000-0000-0000-0000-000000000103', name: 'Starship Bridge', wing: 'Upper Floor', theme: 'sci_fi' as const, puzzleMechanism: 'Arduino control panel + laser maze', status: 'available' as const },
-    { id: '00000000-0000-0000-0000-000000000104', name: 'Pirate Cove', wing: 'Upper Floor', theme: 'adventure' as const, puzzleMechanism: 'Treasure map UV reveal + pulley system', status: 'resetting' as const },
-    { id: '00000000-0000-0000-0000-000000000105', name: 'Medieval Dungeon', wing: 'Annex', theme: 'historical' as const, puzzleMechanism: null, status: 'maintenance' as const },
-    { id: '00000000-0000-0000-0000-000000000106', name: 'Enchanted Forest', wing: 'Annex', theme: 'fantasy' as const, puzzleMechanism: 'Sound-reactive crystal nodes', status: 'closed' as const },
+  const workstationData = [
+    {
+      id: '00000000-0000-0000-0000-000000000101',
+      name: 'İstasyon A — Standart',
+      zone: 'Ana Atölye',
+      workstationType: 'standard' as const,
+      workstationModel: 'ProMarine Table Top Pro',
+      status: 'available' as const,
+    },
+    {
+      id: '00000000-0000-0000-0000-000000000102',
+      name: 'İstasyon B — Premium',
+      zone: 'Ana Atölye',
+      workstationType: 'premium' as const,
+      workstationModel: 'Stone Coat Countertop',
+      status: 'pouring' as const,
+    },
+    {
+      id: '00000000-0000-0000-0000-000000000103',
+      name: 'İstasyon C — Vakum',
+      zone: 'Laboratuvar',
+      workstationType: 'vacuum_chamber' as const,
+      workstationModel: 'BestValueVac 5 Gallon',
+      status: 'available' as const,
+    },
+    {
+      id: '00000000-0000-0000-0000-000000000104',
+      name: 'İstasyon D — Basınç',
+      zone: 'Laboratuvar',
+      workstationType: 'pressure_pot' as const,
+      workstationModel: 'California Air 10L Pot',
+      status: 'curing' as const,
+    },
+    {
+      id: '00000000-0000-0000-0000-000000000105',
+      name: 'Test İstasyonu',
+      zone: 'Test Alanı',
+      workstationType: 'studio' as const,
+      workstationModel: 'ArtResin Starter Kit',
+      status: 'maintenance' as const,
+    },
+    {
+      id: '00000000-0000-0000-0000-000000000106',
+      name: 'Kürleme İstasyonu',
+      zone: 'Kürleme Odası',
+      workstationType: 'standard' as const,
+      workstationModel: 'Humidity-Controlled Bay',
+      status: 'offline' as const,
+    },
   ];
 
-  const rooms = [];
-  for (const room of roomData) {
-    const created = await prisma.escapeRoom.upsert({
-      where: { id: room.id },
+  const workstations = [];
+  for (const workstation of workstationData) {
+    const created = await prisma.workstation.upsert({
+      where: { id: workstation.id },
       update: {},
-      create: { ...room, escapeVenueId: ESCAPE_VENUE_ID },
+      create: { ...workstation, resinStudioId: STUDIO_ID },
     });
-    rooms.push(created);
+    workstations.push(created);
   }
 
   const yesterday = new Date();
   yesterday.setDate(yesterday.getDate() - 1);
 
-  await prisma.gameSession.upsert({
+  await prisma.pourBatch.upsert({
     where: { id: '00000000-0000-0000-0000-000000000201' },
     update: {},
     create: {
       id: '00000000-0000-0000-0000-000000000201',
-      escapeVenueId: ESCAPE_VENUE_ID,
-      escapeRoomId: rooms[2].id,
-      sessionAt: yesterday,
-      gameType: 'corporate',
+      resinStudioId: STUDIO_ID,
+      workstationId: workstations[1].id,
+      scheduledAt: yesterday,
+      pouringType: 'river_table',
       cashAmount: 0,
-      cardAmount: 1240.0,
-      participants: 8,
-      addOnRevenue: 180.0,
-      status: 'verified',
+      cardAmount: 485.0,
+      pieceCount: 1,
+      hardenerRatio: 1.0,
+      status: 'completed',
+      notes: 'Nehrin ortası ahşap masa — mavi pigment',
     },
   });
 
-  await prisma.gameSession.upsert({
+  await prisma.pourBatch.upsert({
     where: { id: '00000000-0000-0000-0000-000000000202' },
     update: {},
     create: {
       id: '00000000-0000-0000-0000-000000000202',
-      escapeVenueId: ESCAPE_VENUE_ID,
-      escapeRoomId: rooms[1].id,
-      sessionAt: yesterday,
-      gameType: 'date_night',
-      cashAmount: 45.0,
-      cardAmount: 285.0,
-      participants: 2,
-      addOnRevenue: 35.0,
-      status: 'verified',
+      resinStudioId: STUDIO_ID,
+      workstationId: workstations[0].id,
+      scheduledAt: new Date(),
+      pouringType: 'countertop',
+      cashAmount: 120.0,
+      cardAmount: 0,
+      pieceCount: 8,
+      hardenerRatio: 1.0,
+      status: 'in_progress',
+      notes: 'Tezgah üstü coaster seti — altın yaprak',
     },
   });
 
-  const reportedAt = new Date();
-  reportedAt.setDate(reportedAt.getDate() - 2);
-
-  await prisma.puzzleMaintenance.upsert({
+  await prisma.equipmentRepair.upsert({
     where: { id: '00000000-0000-0000-0000-000000000301' },
     update: {},
     create: {
       id: '00000000-0000-0000-0000-000000000301',
-      escapeVenueId: ESCAPE_VENUE_ID,
-      escapeRoomId: rooms[4].id,
-      title: 'Kilit mekanizması arızası — Medieval Dungeon',
-      description: 'Ana kapı RFID okuyucu yanıt vermiyor',
-      reportedAt,
+      resinStudioId: STUDIO_ID,
+      workstationId: workstations[4].id,
+      title: 'Vakum pompası contası',
+      description: 'Vakum odası contası yıpranmış, değiştirilmeli',
+      reportedAt: new Date(),
       priority: 'urgent',
       status: 'open',
-      cost: null,
+      cost: 95.0,
     },
   });
 
-  await prisma.puzzleMaintenance.upsert({
+  await prisma.equipmentRepair.upsert({
     where: { id: '00000000-0000-0000-0000-000000000302' },
     update: {},
     create: {
       id: '00000000-0000-0000-0000-000000000302',
-      escapeVenueId: ESCAPE_VENUE_ID,
-      escapeRoomId: rooms[1].id,
-      title: 'Şifre çarkı kalibrasyonu — Vanishing Study',
-      description: 'Son oturumda çark sıkıştı',
-      reportedAt,
+      resinStudioId: STUDIO_ID,
+      workstationId: workstations[0].id,
+      title: 'Karıştırıcı motor bakımı',
+      description: 'Yıllık rutin karıştırıcı motor kontrolü',
+      reportedAt: new Date(),
       priority: 'medium',
       status: 'in_progress',
-      cost: 75.0,
     },
   });
 
-  const scheduledAt = new Date();
-  scheduledAt.setDate(scheduledAt.getDate() + 2);
+  const nextWeek = new Date();
+  nextWeek.setDate(nextWeek.getDate() + 5);
 
-  await prisma.resetChecklist.upsert({
+  await prisma.curingChecklist.upsert({
     where: { id: '00000000-0000-0000-0000-000000000401' },
     update: {},
     create: {
       id: '00000000-0000-0000-0000-000000000401',
-      escapeVenueId: ESCAPE_VENUE_ID,
-      title: 'Tam sıfırlama — Starship Bridge',
-      description: 'Tüm ipuçlarını yeniden yerleştir, kontrol panelini sıfırla',
-      category: 'full_reset',
-      wing: 'Upper Floor',
-      scheduledAt,
+      resinStudioId: STUDIO_ID,
+      title: 'Nem oranı kontrolü',
+      description: 'Kürleme odası %45 nem hedefi doğrulanacak',
+      category: 'humidity_check',
+      zone: 'Kürleme Odası',
+      scheduledAt: nextWeek,
       status: 'scheduled',
     },
   });
 
-  await prisma.resetChecklist.upsert({
+  await prisma.curingChecklist.upsert({
     where: { id: '00000000-0000-0000-0000-000000000402' },
     update: {},
     create: {
       id: '00000000-0000-0000-0000-000000000402',
-      escapeVenueId: ESCAPE_VENUE_ID,
-      title: 'Prop kontrolü — The Crypt',
-      category: 'prop_check',
-      wing: 'Basement Wing',
-      scheduledAt,
-      status: 'scheduled',
+      resinStudioId: STUDIO_ID,
+      title: 'Sıcaklık log kaydı',
+      category: 'temperature_log',
+      zone: 'Laboratuvar',
+      scheduledAt: new Date(),
+      status: 'in_progress',
     },
   });
 
-  await prisma.rateTier.upsert({
+  await prisma.workshopRate.upsert({
     where: { id: '00000000-0000-0000-0000-000000000501' },
     update: {},
     create: {
       id: '00000000-0000-0000-0000-000000000501',
-      escapeVenueId: ESCAPE_VENUE_ID,
-      title: 'Standart Oda Kiralama',
-      rateCategory: 'room_booking',
+      resinStudioId: STUDIO_ID,
+      title: 'Döküm Seansı — Standart',
+      rateCategory: 'pour_session',
       status: 'active',
-      basePrice: 32.0,
+      basePrice: 65.0,
       priceMultiplier: 1.0,
+      notes: 'Saatlik, malzeme hariç',
     },
   });
 
-  await prisma.rateTier.upsert({
+  await prisma.workshopRate.upsert({
     where: { id: '00000000-0000-0000-0000-000000000502' },
     update: {},
     create: {
       id: '00000000-0000-0000-0000-000000000502',
-      escapeVenueId: ESCAPE_VENUE_ID,
-      title: 'Kurumsal Etkinlik Paketi',
-      rateCategory: 'corporate_event',
+      resinStudioId: STUDIO_ID,
+      title: 'Atölye Sınıfı — Nehir Masası',
+      rateCategory: 'class_rental',
       status: 'active',
-      basePrice: 28.0,
-      priceMultiplier: 0.85,
-      notes: '8+ kişilik gruplar için kişi başı indirim',
+      basePrice: 125.0,
+      priceMultiplier: 1.5,
+      notes: 'Hafta sonu grup atölyesi',
     },
   });
 
-  await prisma.propOrder.upsert({
+  await prisma.moldOrder.upsert({
     where: { id: '00000000-0000-0000-0000-000000000601' },
     update: {},
     create: {
       id: '00000000-0000-0000-0000-000000000601',
-      escapeVenueId: ESCAPE_VENUE_ID,
-      customerName: 'Escape Props Co.',
-      propCategory: 'RFID Lock Set',
-      supplierName: 'Escape Props Co.',
+      resinStudioId: STUDIO_ID,
+      customerName: 'Sarah Mitchell',
+      moldType: 'Geode Coaster Set — 6 adet',
+      supplierName: 'Silicone Mold Supply',
       status: 'pending',
-      price: 245.0,
-      notes: 'Medieval Dungeon yedek kilit seti',
+      price: 180.0,
+      notes: 'Özel boyut: 10cm çap',
     },
   });
 
-  await prisma.propOrder.upsert({
+  await prisma.moldOrder.upsert({
     where: { id: '00000000-0000-0000-0000-000000000602' },
     update: {},
     create: {
       id: '00000000-0000-0000-0000-000000000602',
-      escapeVenueId: ESCAPE_VENUE_ID,
-      customerName: 'PuzzleCraft Supply',
-      propCategory: 'Cipher Wheel',
-      supplierName: 'PuzzleCraft Supply',
+      resinStudioId: STUDIO_ID,
+      customerName: 'James Park',
+      moldType: 'River Table Mold — 48 inch',
+      supplierName: 'Custom Mold Works',
       status: 'in_progress',
-      price: 89.0,
+      price: 420.0,
     },
   });
 
-  console.log('Seed completed: Mystery Manor Escapes');
-  console.log('Demo: demo@mysterymanorescapes.com / demo123456');
+  console.log('ResinPulse seed completed.');
 }
 
 main()

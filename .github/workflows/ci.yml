@@ -17,11 +17,11 @@ jobs:
       postgres:
         image: postgres:16-alpine
         env:
-          POSTGRES_USER: escapepulse
-          POSTGRES_PASSWORD: escapepulse123
-          POSTGRES_DB: escapepulse
+          POSTGRES_USER: resinpulse
+          POSTGRES_PASSWORD: resinpulse123
+          POSTGRES_DB: resinpulse
         ports:
-          - 5456:5432
+          - 5458:5432
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -48,7 +48,7 @@ jobs:
           npm run db:migrate
           npm run db:seed
         env:
-          DATABASE_URL: postgresql://escapepulse:escapepulse123@localhost:5456/escapepulse?schema=public
+          DATABASE_URL: postgresql://resinpulse:resinpulse123@localhost:5458/resinpulse?schema=public
 
       - name: Run unit tests
         run: npm test
@@ -58,9 +58,9 @@ jobs:
 
       - name: Start API and run integration tests
         env:
-          DATABASE_URL: postgresql://escapepulse:escapepulse123@localhost:5456/escapepulse?schema=public
-          JWT_SECRET: escapepulse-ci-secret
-          PORT: 4016
+          DATABASE_URL: postgresql://resinpulse:resinpulse123@localhost:5458/resinpulse?schema=public
+          JWT_SECRET: resinpulse-ci-secret
+          PORT: 4018
         run: |
           npm run start:prod &
           sleep 5
@@ -87,4 +87,4 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          NEXT_PUBLIC_API_URL: http://localhost:4016/api
+          NEXT_PUBLIC_API_URL: http://localhost:4018/api

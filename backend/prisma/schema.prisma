@@ -10,93 +10,94 @@ datasource db {
 enum UserRole {
   owner
   manager
-  game_master
+  artisan
 }
 
-enum RoomTheme {
-  horror
-  mystery
-  sci_fi
-  historical
-  fantasy
-  adventure
+enum WorkstationType {
+  standard
+  premium
+  pressure_pot
+  vacuum_chamber
+  studio
 }
 
-enum RoomStatus {
+enum WorkstationStatus {
   available
-  in_game
-  resetting
+  pouring
+  curing
   maintenance
-  closed
+  offline
 }
 
-enum SessionStatus {
-  recorded
-  verified
-  disputed
+enum BatchStatus {
+  scheduled
+  in_progress
+  completed
+  failed
 }
 
-enum GameType {
-  private_group
-  corporate
-  birthday
-  date_night
-  team_building
+enum PourType {
+  countertop
+  river_table
+  jewelry
+  coaster
+  charcuterie
+  custom
 }
 
-enum PuzzlePriority {
+enum MaintenancePriority {
   low
   medium
   high
   urgent
 }
 
-enum PuzzleStatus {
+enum MaintenanceStatus {
   open
   in_progress
   completed
   cancelled
 }
 
-enum ResetCategory {
-  full_reset
-  prop_check
-  clue_refresh
-  lock_repair
-  lighting
+enum CuringCategory {
+  humidity_check
+  temperature_log
+  mold_prep
+  pigment_mix
+  inventory
   other
 }
 
-enum ResetStatus {
+enum CuringStatus {
   scheduled
   in_progress
   completed
   overdue
 }
 
-enum RateCategory {
-  room_booking
-  corporate_event
-  birthday_package
-  team_building
-  peak_hour
+enum WorkshopCategory {
+  pour_session
+  class_rental
+  custom_commission
+  material_sale
+  custom_work
   other
 }
 
-enum RateStatus {
+enum WorkshopRateStatus {
   active
   upcoming
   archived
 }
 
-enum PropOrderStatus {
+enum MoldOrderStatus {
   pending
   in_progress
   completed
   delivered
 }
 
-model EscapeVenue {
+model ResinStudio {
   id          String   @id @default(uuid())
   name        String
   phone       String?
@@ -104,155 +105,155 @@ model EscapeVenue {
   city        String?
   state       String?
   zipCode     String?  @map("zip_code")
-  totalRooms  Int      @default(6) @map("total_rooms")
+  totalWorkstations  Int      @default(6) @map("total_workstations")
   timezone    String   @default("America/Chicago")
   createdAt   DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @updatedAt @map("updated_at")
 
-  users              User[]
-  escapeRooms        EscapeRoom[]
-  gameSessions       GameSession[]
-  puzzleMaintenance  PuzzleMaintenance[]
-  resetChecklists    ResetChecklist[]
-  rateTiers          RateTier[]
-  propOrders         PropOrder[]
+  users            User[]
+  workstations            Workstation[]
+  pourBatches    PourBatch[]
+  equipmentRepairs  EquipmentRepair[]
+  curingChecklists  CuringChecklist[]
+  workshopRates      WorkshopRate[]
+  moldOrders       MoldOrder[]
 
-  @@map("escape_venues")
+  @@map("resin_studios")
 }
 
 model User {
-  id            String   @id @default(uuid())
-  email         String   @unique
-  passwordHash  String   @map("password_hash")
-  firstName     String   @map("first_name")
-  lastName      String   @map("last_name")
-  role          UserRole @default(owner)
-  escapeVenueId String   @map("escape_venue_id")
-  createdAt     DateTime @default(now()) @map("created_at")
-  updatedAt     DateTime @updatedAt @map("updated_at")
+  id              String   @id @default(uuid())
+  email           String   @unique
+  passwordHash    String   @map("password_hash")
+  firstName       String   @map("first_name")
+  lastName        String   @map("last_name")
+  role            UserRole @default(owner)
+  resinStudioId String   @map("resin_studio_id")
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
 
-  escapeVenue EscapeVenue @relation(fields: [escapeVenueId], references: [id], onDelete: Cascade)
+  resinStudio ResinStudio @relation(fields: [resinStudioId], references: [id], onDelete: Cascade)
 
   @@map("users")
 }
 
-model EscapeRoom {
+model Workstation {
   id              String     @id @default(uuid())
-  escapeVenueId   String     @map("escape_venue_id")
+  resinStudioId String     @map("resin_studio_id")
   name            String
-  wing            String
-  theme           RoomTheme  @default(mystery)
-  puzzleMechanism String?    @map("puzzle_mechanism")
-  status          RoomStatus @default(available)
+  zone            String
+  workstationType        WorkstationType   @default(standard) @map("workstation_type")
+  workstationModel       String?    @map("workstation_model")
+  status          WorkstationStatus @default(available)
   notes           String?
   createdAt       DateTime   @default(now()) @map("created_at")
   updatedAt       DateTime   @updatedAt @map("updated_at")
 
-  escapeVenue       EscapeVenue         @relation(fields: [escapeVenueId], references: [id], onDelete: Cascade)
-  gameSessions      GameSession[]
-  puzzleMaintenance PuzzleMaintenance[]
+  resinStudio   ResinStudio     @relation(fields: [resinStudioId], references: [id], onDelete: Cascade)
+  pourBatches   PourBatch[]
+  equipmentRepairs EquipmentRepair[]
 
-  @@unique([escapeVenueId, name])
-  @@index([escapeVenueId, status])
-  @@map("escape_rooms")
+  @@unique([resinStudioId, name])
+  @@index([resinStudioId, status])
+  @@map("workstations")
 }
 
-model GameSession {
-  id             String        @id @default(uuid())
-  escapeVenueId  String        @map("escape_venue_id")
-  escapeRoomId   String        @map("escape_room_id")
-  sessionAt      DateTime      @map("session_at")
-  gameType       GameType      @default(private_group) @map("game_type")
-  cashAmount     Float         @default(0) @map("cash_amount")
-  cardAmount     Float         @default(0) @map("card_amount")
-  participants   Int           @default(0)
-  addOnRevenue   Float         @default(0) @map("add_on_revenue")
-  status         SessionStatus @default(recorded)
-  notes          String?
-  createdAt      DateTime      @default(now()) @map("created_at")
-  updatedAt      DateTime      @updatedAt @map("updated_at")
-
-  escapeVenue EscapeVenue @relation(fields: [escapeVenueId], references: [id], onDelete: Cascade)
-  escapeRoom  EscapeRoom  @relation(fields: [escapeRoomId], references: [id], onDelete: Cascade)
-
-  @@index([escapeVenueId, sessionAt])
-  @@index([escapeVenueId, status])
-  @@map("game_sessions")
-}
-
-model PuzzleMaintenance {
-  id            String         @id @default(uuid())
-  escapeVenueId String         @map("escape_venue_id")
-  escapeRoomId  String         @map("escape_room_id")
-  title         String
-  description   String?
-  reportedAt    DateTime       @map("reported_at")
-  completedAt   DateTime?      @map("completed_at")
-  priority      PuzzlePriority @default(medium)
-  status        PuzzleStatus   @default(open)
-  cost          Float?
-  notes         String?
-  createdAt     DateTime       @default(now()) @map("created_at")
-  updatedAt     DateTime       @updatedAt @map("updated_at")
-
-  escapeVenue EscapeVenue @relation(fields: [escapeVenueId], references: [id], onDelete: Cascade)
-  escapeRoom  EscapeRoom  @relation(fields: [escapeRoomId], references: [id], onDelete: Cascade)
-
-  @@index([escapeVenueId, status])
-  @@index([escapeVenueId, priority])
-  @@map("puzzle_maintenance")
-}
-
-model ResetChecklist {
-  id            String        @id @default(uuid())
-  escapeVenueId String        @map("escape_venue_id")
-  title         String
-  description   String?
-  category      ResetCategory @default(other)
-  wing          String?
-  scheduledAt   DateTime      @map("scheduled_at")
-  status        ResetStatus   @default(scheduled)
-  createdAt     DateTime      @default(now()) @map("created_at")
-  updatedAt     DateTime      @updatedAt @map("updated_at")
-
-  escapeVenue EscapeVenue @relation(fields: [escapeVenueId], references: [id], onDelete: Cascade)
-
-  @@index([escapeVenueId, scheduledAt])
-  @@map("reset_checklists")
-}
-
-model RateTier {
-  id              String       @id @default(uuid())
-  escapeVenueId   String       @map("escape_venue_id")
-  title           String
-  rateCategory    RateCategory @default(room_booking) @map("rate_category")
-  status          RateStatus   @default(active)
-  basePrice       Float        @map("base_price")
-  priceMultiplier Float        @default(1.0) @map("price_multiplier")
+model PourBatch {
+  id              String      @id @default(uuid())
+  resinStudioId String      @map("resin_studio_id")
+  workstationId          String      @map("workstation_id")
+  scheduledAt     DateTime    @map("scheduled_at")
+  pouringType      PourType  @default(countertop) @map("pouring_type")
+  cashAmount      Float       @default(0) @map("cash_amount")
+  cardAmount      Float       @default(0) @map("card_amount")
+  pieceCount       Int         @default(1) @map("piece_count")
+  hardenerRatio  Float       @default(0) @map("hardener_ratio")
+  status          BatchStatus @default(scheduled)
   notes           String?
-  createdAt       DateTime     @default(now()) @map("created_at")
-  updatedAt       DateTime     @updatedAt @map("updated_at")
+  createdAt       DateTime    @default(now()) @map("created_at")
+  updatedAt       DateTime    @updatedAt @map("updated_at")
 
-  escapeVenue EscapeVenue @relation(fields: [escapeVenueId], references: [id], onDelete: Cascade)
+  resinStudio ResinStudio @relation(fields: [resinStudioId], references: [id], onDelete: Cascade)
+  workstation          Workstation          @relation(fields: [workstationId], references: [id], onDelete: Cascade)
 
-  @@index([escapeVenueId, rateCategory])
-  @@map("rate_tiers")
+  @@index([resinStudioId, scheduledAt])
+  @@index([resinStudioId, status])
+  @@map("pour_batches")
 }
 
-model PropOrder {
-  id            String          @id @default(uuid())
-  escapeVenueId String          @map("escape_venue_id")
-  customerName  String          @map("customer_name")
-  propCategory  String          @map("prop_category")
-  supplierName  String?         @map("supplier_name")
-  status        PropOrderStatus @default(pending)
-  price         Float           @default(0)
-  notes         String?
-  createdAt     DateTime        @default(now()) @map("created_at")
-  updatedAt     DateTime        @updatedAt @map("updated_at")
+model EquipmentRepair {
+  id              String              @id @default(uuid())
+  resinStudioId String              @map("resin_studio_id")
+  workstationId          String              @map("workstation_id")
+  title           String
+  description     String?
+  reportedAt      DateTime            @map("reported_at")
+  completedAt     DateTime?           @map("completed_at")
+  priority        MaintenancePriority @default(medium)
+  status          MaintenanceStatus   @default(open)
+  cost            Float?
+  notes           String?
+  createdAt       DateTime            @default(now()) @map("created_at")
+  updatedAt       DateTime            @updatedAt @map("updated_at")
 
-  escapeVenue EscapeVenue @relation(fields: [escapeVenueId], references: [id], onDelete: Cascade)
+  resinStudio ResinStudio @relation(fields: [resinStudioId], references: [id], onDelete: Cascade)
+  workstation          Workstation          @relation(fields: [workstationId], references: [id], onDelete: Cascade)
 
-  @@index([escapeVenueId, status])
-  @@map("prop_orders")
+  @@index([resinStudioId, status])
+  @@index([resinStudioId, priority])
+  @@map("equipment_repairs")
+}
+
+model CuringChecklist {
+  id              String        @id @default(uuid())
+  resinStudioId String        @map("resin_studio_id")
+  title           String
+  description     String?
+  category        CuringCategory @default(other)
+  zone            String?
+  scheduledAt     DateTime      @map("scheduled_at")
+  status          CuringStatus   @default(scheduled)
+  createdAt       DateTime      @default(now()) @map("created_at")
+  updatedAt       DateTime      @updatedAt @map("updated_at")
+
+  resinStudio ResinStudio @relation(fields: [resinStudioId], references: [id], onDelete: Cascade)
+
+  @@index([resinStudioId, scheduledAt])
+  @@map("curing_checklists")
+}
+
+model WorkshopRate {
+  id              String           @id @default(uuid())
+  resinStudioId String           @map("resin_studio_id")
+  title           String
+  rateCategory    WorkshopCategory   @default(pour_session) @map("rate_category")
+  status          WorkshopRateStatus @default(active)
+  basePrice       Float            @map("base_price")
+  priceMultiplier Float            @default(1.0) @map("price_multiplier")
+  notes           String?
+  createdAt       DateTime         @default(now()) @map("created_at")
+  updatedAt       DateTime         @updatedAt @map("updated_at")
+
+  resinStudio ResinStudio @relation(fields: [resinStudioId], references: [id], onDelete: Cascade)
+
+  @@index([resinStudioId, rateCategory])
+  @@map("workshop_rates")
+}
+
+model MoldOrder {
+  id              String          @id @default(uuid())
+  resinStudioId String          @map("resin_studio_id")
+  customerName    String          @map("customer_name")
+  moldType        String          @map("mold_type")
+  supplierName    String?         @map("supplier_name")
+  status          MoldOrderStatus @default(pending)
+  price           Float           @default(0)
+  notes           String?
+  createdAt       DateTime        @default(now()) @map("created_at")
+  updatedAt       DateTime        @updatedAt @map("updated_at")
+
+  resinStudio ResinStudio @relation(fields: [resinStudioId], references: [id], onDelete: Cascade)
+
+  @@index([resinStudioId, status])
+  @@map("mold_orders")
 }

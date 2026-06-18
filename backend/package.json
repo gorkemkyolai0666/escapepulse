@@ -1,7 +1,7 @@
 {
-  "name": "escapepulse-backend",
+  "name": "resinpulse-backend",
   "version": "1.0.0",
-  "description": "EscapePulse Escape Room Facility Operations API",
+  "description": "ResinPulse Epoxy Resin Workshop Operations API",
   "scripts": {
     "build": "nest build",
     "start": "nest start",
