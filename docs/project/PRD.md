@@ -2,7 +2,7 @@
 
 ## Özet
 
-ResinPulse, ABD'deki bağımsız epoksi reçine sanat atölyeleri için istasyon envanteri, döküm planlaması, ekipman bakımı, kürlenme kontrolü ve kalıp siparişlerini tek platformda yöneten B2B SaaS ürünüdür.
+ResinPulse, ABD'deki bağımsız epoksi reçine sanat atölyeleri için istasyon envanteri, döküm planlaması, ekipman bakımı, kürleme kontrolü ve kalıp siparişlerini tek platformda yöneten B2B SaaS ürünüdür.
 
 ## Tasarım Yönü: Futuristic Laboratory Glassmorphism
 
@@ -16,14 +16,14 @@ Laboratuvar estetiği — derin indigo (#1A1B4B), iridescent cyan (#00D4FF) ve r
 
 ## Problem
 
-Reçine partileri, kürlenme programları, nem kontrolleri ve kalıp siparişleri dağınık tablolarda tutuluyor. Atölye sınıfı gelirleri, malzeme maliyetleri ve ekipman bakım planları birbirinden kopuk yönetiliyor.
+Reçine partileri, kürleme programları, nem kontrolleri ve kalıp siparişleri dağınık tablolarda tutuluyor. Atölye sınıfı gelirleri, malzeme maliyetleri ve ekipman bakım planları birbirinden kopuk yönetiliyor.
 
 ## Çözüm
 
-- İstasyon envanteri ve durum takibi (müsait, dökümde, kürlenmede, bakım, kapalı)
+- İstasyon envanteri ve durum takibi (müsait, dökümde, kürlemede, bakım, kapalı)
 - Döküm partisi gelir kaydı (nakit, kart, parça sayısı, sertleştirici oranı)
 - Ekipman onarım emirleri ve öncelik yönetimi
-- Kürlenme kontrol listesi (nem, sıcaklık, pigment)
+- Kürleme kontrol listesi (nem, sıcaklık, pigment)
 - Kalıp sipariş yönetimi
 - Atölye ücret kademeleri (döküm seansı, sınıf, özel sipariş)
 
@@ -44,7 +44,7 @@ SaaS — istasyon başına aylık abonelik ($5-12/istasyon/ay)
 - [x] İstasyon CRUD
 - [x] Döküm partisi CRUD
 - [x] Ekipman bakım CRUD
-- [x] Kürlenme kontrol listesi CRUD
+- [x] Kürleme kontrol listesi CRUD
 - [x] Atölye ücreti CRUD
 - [x] Kalıp siparişi CRUD
 - [x] Demo hesap ve seed verisi
