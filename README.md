@@ -1,6 +1,6 @@
 # ResinPulse
 
-Epoksi reçine atölyesi operasyon yönetim platformu — istasyon envanteri, döküm partileri, ekipman bakımı, kürlenme kontrolleri ve kalıp siparişleri.
+Epoksi reçine atölyesi operasyon yönetim platformu — istasyon envanteri, döküm partileri, ekipman bakımı, kürleme kontrolleri ve kalıp siparişleri.
 
 ## Demo
 
