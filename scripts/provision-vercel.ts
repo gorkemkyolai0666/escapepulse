@@ -1,13 +1,13 @@
 #!/usr/bin/env tsx
 /**
- * Vercel provisioning for EscapePulse frontend.
+ * Vercel provisioning for ResinPulse frontend.
  * Uses GitHub integration — no CLI deployment.
  */
 
-const GITHUB_REPO = process.env.GITHUB_REPO || 'gorkemkyolai06/escapepulse';
+const GITHUB_REPO = process.env.GITHUB_REPO || 'gorkemkyolai06/resinpulse';
 
 async function main() {
-  console.log('Vercel provisioning for EscapePulse frontend');
+  console.log('Vercel provisioning for ResinPulse frontend');
   console.log('Vercel MCP deploy_to_vercel suggests CLI — using GitHub integration instead');
   console.log('\nManual Vercel setup (one-time):');
   console.log(`  1. Import GitHub repo: ${GITHUB_REPO}`);

@@ -1,14 +1,14 @@
 #!/usr/bin/env tsx
 /**
- * EscapePulse infrastructure provisioning orchestrator.
+ * ResinPulse infrastructure provisioning orchestrator.
  * Idempotent — safe to run multiple times.
  */
 
-const GITHUB_REPO = process.env.GITHUB_REPO || 'gorkemkyolai06/escapepulse';
+const GITHUB_REPO = process.env.GITHUB_REPO || 'gorkemkyolai06/resinpulse';
 
 async function main() {
   console.log('════════════════════════════════════════════════════════');
-  console.log('EscapePulse Infrastructure Provisioning');
+  console.log('ResinPulse Infrastructure Provisioning');
   console.log(`Repository: ${GITHUB_REPO}`);
   console.log('════════════════════════════════════════════════════════');
 

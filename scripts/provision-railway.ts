@@ -1,11 +1,11 @@
 #!/usr/bin/env tsx
 /**
- * Railway provisioning for EscapePulse backend.
+ * Railway provisioning for ResinPulse backend.
  * Requires RAILWAY_API_TOKEN environment variable.
  */
 
-const PROJECT_NAME = 'escapepulse';
-const GITHUB_REPO = process.env.GITHUB_REPO || 'gorkemkyolai06/escapepulse';
+const PROJECT_NAME = 'resinpulse';
+const GITHUB_REPO = process.env.GITHUB_REPO || 'gorkemkyolai06/resinpulse';
 
 async function main() {
   const token = process.env.RAILWAY_API_TOKEN;
