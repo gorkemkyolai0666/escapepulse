@@ -4,64 +4,64 @@
 
 @layer base {
   :root {
-    --background: 270 30% 96%;
-    --foreground: 270 45% 12%;
-    --card: 270 25% 98%;
-    --card-foreground: 270 45% 12%;
-    --popover: 270 25% 98%;
-    --popover-foreground: 270 45% 12%;
-    --primary: 270 55% 22%;
-    --primary-foreground: 38 90% 92%;
-    --secondary: 270 18% 90%;
-    --secondary-foreground: 270 45% 12%;
-    --muted: 270 15% 91%;
-    --muted-foreground: 270 20% 40%;
-    --accent: 38 85% 52%;
-    --accent-foreground: 270 55% 12%;
-    --destructive: 350 65% 42%;
+    --background: 248 60% 98%;
+    --foreground: 244 47% 14%;
+    --card: 0 0% 100%;
+    --card-foreground: 244 47% 14%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 244 47% 14%;
+    --primary: 244 47% 20%;
+    --primary-foreground: 248 60% 98%;
+    --secondary: 280 30% 92%;
+    --secondary-foreground: 244 47% 14%;
+    --muted: 248 30% 94%;
+    --muted-foreground: 244 20% 46%;
+    --accent: 192 100% 42%;
+    --accent-foreground: 244 47% 10%;
+    --destructive: 0 62% 45%;
     --destructive-foreground: 0 0% 100%;
-    --success: 150 45% 35%;
+    --success: 160 60% 38%;
     --success-foreground: 0 0% 100%;
-    --warning: 32 90% 48%;
-    --warning-foreground: 270 55% 12%;
-    --void: 270 55% 12%;
-    --candle: 38 85% 52%;
-    --fog: 220 12% 72%;
-    --crimson: 350 55% 38%;
-    --border: 270 18% 84%;
-    --input: 270 18% 84%;
-    --ring: 38 85% 52%;
-    --radius: 6px;
+    --warning: 38 85% 48%;
+    --warning-foreground: 244 47% 14%;
+    --void: 244 47% 20%;
+    --iris: 280 65% 48%;
+    --glow: 192 100% 42%;
+    --pearl: 248 60% 98%;
+    --border: 248 25% 88%;
+    --input: 248 25% 88%;
+    --ring: 192 100% 42%;
+    --radius: 20px;
   }
 
   .dark {
-    --background: 270 45% 7%;
-    --foreground: 38 30% 92%;
-    --card: 270 40% 10%;
-    --card-foreground: 38 30% 92%;
-    --popover: 270 40% 10%;
-    --popover-foreground: 38 30% 92%;
-    --primary: 38 85% 55%;
-    --primary-foreground: 270 45% 7%;
-    --secondary: 270 30% 16%;
-    --secondary-foreground: 38 30% 92%;
-    --muted: 270 25% 14%;
-    --muted-foreground: 220 12% 62%;
-    --accent: 350 55% 45%;
-    --accent-foreground: 38 30% 92%;
-    --destructive: 350 60% 48%;
+    --background: 244 47% 8%;
+    --foreground: 248 40% 94%;
+    --card: 244 40% 12%;
+    --card-foreground: 248 40% 94%;
+    --popover: 244 40% 12%;
+    --popover-foreground: 248 40% 94%;
+    --primary: 192 100% 50%;
+    --primary-foreground: 244 47% 8%;
+    --secondary: 280 30% 18%;
+    --secondary-foreground: 248 40% 94%;
+    --muted: 244 30% 16%;
+    --muted-foreground: 248 15% 62%;
+    --accent: 192 100% 50%;
+    --accent-foreground: 244 47% 8%;
+    --destructive: 0 58% 50%;
     --destructive-foreground: 0 0% 100%;
-    --success: 150 40% 42%;
-    --success-foreground: 270 45% 7%;
-    --warning: 32 85% 52%;
-    --warning-foreground: 270 45% 7%;
-    --void: 270 45% 7%;
-    --candle: 38 85% 55%;
-    --fog: 220 12% 55%;
-    --crimson: 350 55% 48%;
-    --border: 270 22% 18%;
-    --input: 270 22% 18%;
-    --ring: 38 85% 55%;
+    --success: 160 55% 42%;
+    --success-foreground: 244 47% 8%;
+    --warning: 38 80% 52%;
+    --warning-foreground: 244 47% 8%;
+    --void: 244 47% 8%;
+    --iris: 280 65% 58%;
+    --glow: 192 100% 50%;
+    --pearl: 248 40% 94%;
+    --border: 244 25% 20%;
+    --input: 244 25% 20%;
+    --ring: 192 100% 50%;
   }
 }
 
@@ -71,49 +71,23 @@
   }
   body {
     @apply bg-background text-foreground antialiased;
+    background-image: radial-gradient(ellipse at 20% 0%, hsl(var(--accent) / 0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 100%, hsl(var(--iris) / 0.05) 0%, transparent 50%);
   }
   h1,
   h2,
   h3,
   .font-display {
-    font-family: var(--font-cinzel), Georgia, serif;
-    @apply font-normal tracking-wide;
+    font-family: var(--font-display), system-ui, sans-serif;
+    @apply font-semibold tracking-tight;
   }
 }
 
 @layer components {
-  .mystery-card {
-    @apply border border-border/60 border-l-4 border-l-accent bg-card shadow-md;
-    border-radius: var(--radius);
+  .glass-card {
+    @apply rounded-[var(--radius)] border border-border/50 bg-card/70 shadow-lg shadow-accent/5 backdrop-blur-md;
   }
-
-  .mystery-btn {
-    @apply font-semibold tracking-wide transition-colors;
-    border-radius: var(--radius);
-  }
-
-  .room-pill {
-    @apply px-3 py-1 text-xs font-bold uppercase tracking-widest;
-    border-radius: var(--radius);
-  }
-
-  .room-pill-available {
-    @apply bg-success/15 text-success;
-  }
-
-  .room-pill-in-game {
-    @apply bg-accent/20 text-accent;
-  }
-
-  .room-pill-resetting {
-    @apply bg-warning/15 text-warning-foreground;
-  }
-
-  .room-pill-maintenance {
-    @apply bg-destructive/15 text-destructive;
-  }
-
-  .room-pill-closed {
-    @apply bg-muted text-muted-foreground;
+  .resin-btn {
+    @apply rounded-2xl transition-all duration-200;
   }
 }
