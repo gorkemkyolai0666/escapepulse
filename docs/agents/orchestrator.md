@@ -224,6 +224,8 @@ Mandatory research documents:
 * COMPETITOR_ANALYSIS.md
 * USER_PAIN_POINTS.md
 * MONETIZATION.md
+* MVP_VALIDATION.md
+* FINAL_DOCUMENTATION.md
 
 Every important decision must be documented.
 
@@ -266,7 +268,7 @@ Support:
 Requirements:
 
 * WCAG AA accessibility compliance
-* Proper visual hierarchy
+* Kumaşer visual hierarchy
 * Consistent spacing
 * Loading states
 * Empty states
@@ -357,7 +359,7 @@ Deployment is mandatory.
 
 For every project:
 
-1. Create frontend and backend applications.
+1. Create frontend and backend mold_preps.
 2. Generate .env.example files.
 3. Configure Railway deployment.
 4. Configure Vercel deployment.

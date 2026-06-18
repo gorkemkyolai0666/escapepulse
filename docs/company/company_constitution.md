@@ -1,7 +1,7 @@
 # Product Principles
 
 - Products must be web-based.
-- Mobile applications are not allowed unless absolutely necessary.
+- Mobile mold_preps are not allowed unless absolutely necessary.
 - Products must run in modern browsers without installation.
 
 - Existing market categories are allowed if clear innovation exists.
@@ -89,7 +89,7 @@ Therefore:
 * All competitor analysis documents must be written in Turkish.
 * All final project reports must be written in Turkish.
 
-The following files must always be maintained in Turkish:
+The follozone files must always be maintained in Turkish:
 
 * PRD.md
 * ROADMAP.md

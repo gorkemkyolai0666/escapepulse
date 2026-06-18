@@ -36,7 +36,7 @@ docs/project/FINAL_DOCUMENTATION.md
 
 # Language Rules
 
-The application target audience is Turkish-speaking users.
+The mold_prep target audience is Turkish-speaking users.
 
 All user-facing content must be written in Turkish.
 
@@ -150,7 +150,7 @@ Every page must include:
 Ensure:
 
 * WCAG AA compliance
-* Proper visual hierarchy
+* Kumaşer visual hierarchy
 * Mobile responsiveness
 * Consistent user flows
 * Fast perceived performance

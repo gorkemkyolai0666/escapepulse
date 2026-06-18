@@ -4,13 +4,13 @@ services:
   postgres:
     image: postgres:16-alpine
     environment:
-      POSTGRES_USER: escapepulse
-      POSTGRES_PASSWORD: escapepulse123
-      POSTGRES_DB: escapepulse
+      POSTGRES_USER: resinpulse
+      POSTGRES_PASSWORD: resinpulse123
+      POSTGRES_DB: resinpulse
     ports:
-      - '5456:5432'
+      - '5458:5432'
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U escapepulse']
+      test: ['CMD-SHELL', 'pg_isready -U resinpulse']
       interval: 5s
       timeout: 5s
       retries: 5
@@ -18,12 +18,12 @@ services:
   backend:
     build: ./backend
     ports:
-      - '4016:4016'
+      - '4018:4018'
     environment:
-      DATABASE_URL: postgresql://escapepulse:escapepulse123@postgres:5432/escapepulse?schema=public
-      JWT_SECRET: escapepulse-dev-secret
-      FRONTEND_URL: http://localhost:3016
-      PORT: 4016
+      DATABASE_URL: postgresql://resinpulse:resinpulse123@postgres:5432/resinpulse?schema=public
+      JWT_SECRET: resinpulse-dev-secret
+      FRONTEND_URL: http://localhost:3018
+      PORT: 4018
     depends_on:
       postgres:
         condition: service_healthy
@@ -32,8 +32,8 @@ services:
   frontend:
     build: ./frontend
     ports:
-      - '3016:3016'
+      - '3018:3018'
     environment:
-      NEXT_PUBLIC_API_URL: http://localhost:4016/api
+      NEXT_PUBLIC_API_URL: http://localhost:4018/api
     depends_on:
       - backend
