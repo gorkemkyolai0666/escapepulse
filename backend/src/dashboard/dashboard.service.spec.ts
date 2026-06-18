@@ -6,17 +6,17 @@ describe('DashboardService', () => {
   let service: DashboardService;
 
   const mockPrisma = {
-    escapeVenue: { findUnique: jest.fn() },
-    escapeRoom: { count: jest.fn(), groupBy: jest.fn() },
-    gameSession: {
+    resinStudio: { findUnique: jest.fn() },
+    workstation: { count: jest.fn(), groupBy: jest.fn() },
+    pourBatch: {
       count: jest.fn(),
       aggregate: jest.fn(),
       findMany: jest.fn().mockResolvedValue([]),
     },
-    puzzleMaintenance: { count: jest.fn(), findMany: jest.fn().mockResolvedValue([]) },
-    resetChecklist: { count: jest.fn() },
-    rateTier: { count: jest.fn() },
-    propOrder: { count: jest.fn() },
+    equipmentRepair: { count: jest.fn(), findMany: jest.fn().mockResolvedValue([]) },
+    curingChecklist: { count: jest.fn() },
+    workshopRate: { count: jest.fn() },
+    moldOrder: { count: jest.fn() },
   };
 
   beforeEach(async () => {
@@ -31,43 +31,43 @@ describe('DashboardService', () => {
     jest.clearAllMocks();
   });
 
-  it('should return tennis club dashboard stats', async () => {
-    mockPrisma.escapeVenue.findUnique.mockResolvedValue({ totalRooms: 8 });
-    mockPrisma.escapeRoom.count
+  it('should return artisaning shop dashboard stats', async () => {
+    mockPrisma.resinStudio.findUnique.mockResolvedValue({ totalWorkstations: 8 });
+    mockPrisma.workstation.count
       .mockResolvedValueOnce(8)
       .mockResolvedValueOnce(4)
       .mockResolvedValueOnce(2);
-    mockPrisma.gameSession.count.mockResolvedValue(42);
-    mockPrisma.puzzleMaintenance.count
+    mockPrisma.pourBatch.count.mockResolvedValue(42);
+    mockPrisma.equipmentRepair.count
       .mockResolvedValueOnce(3)
       .mockResolvedValueOnce(1);
-    mockPrisma.gameSession.aggregate.mockResolvedValue({
-      _sum: { cashAmount: 120, cardAmount: 280, addOnRevenue: 95 },
+    mockPrisma.pourBatch.aggregate.mockResolvedValue({
+      _sum: { cashAmount: 120, cardAmount: 280, hardenerRatio: 95 },
     });
-    mockPrisma.gameSession.findMany.mockResolvedValue([]);
-    mockPrisma.puzzleMaintenance.findMany.mockResolvedValue([]);
-    mockPrisma.resetChecklist.count.mockResolvedValue(2);
-    mockPrisma.rateTier.count.mockResolvedValue(3);
-    mockPrisma.propOrder.count
+    mockPrisma.pourBatch.findMany.mockResolvedValue([]);
+    mockPrisma.equipmentRepair.findMany.mockResolvedValue([]);
+    mockPrisma.curingChecklist.count.mockResolvedValue(2);
+    mockPrisma.workshopRate.count.mockResolvedValue(3);
+    mockPrisma.moldOrder.count
       .mockResolvedValueOnce(3)
       .mockResolvedValueOnce(2);
-    mockPrisma.escapeRoom.groupBy.mockResolvedValue([
-      { wing: 'East Wing', _count: { id: 3 } },
-      { wing: 'West Wing', _count: { id: 3 } },
+    mockPrisma.workstation.groupBy.mockResolvedValue([
+      { zone: 'East Zone', _count: { id: 3 } },
+      { zone: 'West Zone', _count: { id: 3 } },
     ]);
 
-    const stats = await service.getStats('tennis-club-1');
+    const stats = await service.getStats('shop-1');
 
-    expect(stats).toHaveProperty('roomUtilizationRate');
+    expect(stats).toHaveProperty('workstationUtilizationRate');
     expect(stats).toHaveProperty('dailyRevenue', 495);
-    expect(stats).toHaveProperty('dailyAddOnRevenue', 95);
-    expect(stats).toHaveProperty('roomWings');
-    expect(stats).toHaveProperty('urgentPuzzleMaintenance');
-    expect(stats).toHaveProperty('pendingResetChecklist');
-    expect(stats).toHaveProperty('activeRateTiers', 3);
-    expect(stats).toHaveProperty('pendingPropOrders', 3);
-    expect(stats).toHaveProperty('completedPropOrders', 2);
-    expect(stats).toHaveProperty('availableRooms', 4);
-    expect(stats).toHaveProperty('totalRooms', 8);
+    expect(stats).toHaveProperty('dailyConeAdjustments', 95);
+    expect(stats).toHaveProperty('studioZones');
+    expect(stats).toHaveProperty('urgentEquipmentRepair');
+    expect(stats).toHaveProperty('pendingCuringChecklist');
+    expect(stats).toHaveProperty('activeWorkshopRates', 3);
+    expect(stats).toHaveProperty('pendingMoldOrders', 3);
+    expect(stats).toHaveProperty('completedMoldOrders', 2);
+    expect(stats).toHaveProperty('availableWorkstations', 4);
+    expect(stats).toHaveProperty('totalWorkstations', 8);
   });
 });

@@ -15,7 +15,7 @@ export class RegisterDto {
   lastName: string;
 
   @IsString()
-  escapeVenueName: string;
+  resinStudioName: string;
 
   @IsOptional()
   @IsString()
