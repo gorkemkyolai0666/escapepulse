@@ -1,4 +1,4 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4016/api';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4018/api';
 
 interface RequestOptions {
   method?: string;
@@ -45,7 +45,7 @@ export const api = {
       password: string;
       firstName: string;
       lastName: string;
-      escapeVenueName: string;
+      resinStudioName: string;
       phone?: string;
       city?: string;
       state?: string;
@@ -61,108 +61,108 @@ export const api = {
     stats: (token: string) => request('/dashboard/stats', { token }),
   },
 
-  escapeRooms: {
-    list: (token: string, params?: { page?: number; status?: string; wing?: string }) => {
+  workstations: {
+    list: (token: string, params?: { page?: number; status?: string; zone?: string }) => {
       const query = new URLSearchParams();
       if (params?.page) query.set('page', String(params.page));
       if (params?.status) query.set('status', params.status);
-      if (params?.wing) query.set('wing', params.wing);
+      if (params?.zone) query.set('zone', params.zone);
       const qs = query.toString();
-      return request(`/escape-rooms${qs ? `?${qs}` : ''}`, { token });
+      return request(`/workstations${qs ? `?${qs}` : ''}`, { token });
     },
     create: (token: string, data: Record<string, unknown>) =>
-      request('/escape-rooms', { method: 'POST', body: data, token }),
+      request('/workstations', { method: 'POST', body: data, token }),
     update: (token: string, id: string, data: Record<string, unknown>) =>
-      request(`/escape-rooms/${id}`, { method: 'PATCH', body: data, token }),
+      request(`/workstations/${id}`, { method: 'PATCH', body: data, token }),
     delete: (token: string, id: string) =>
-      request(`/escape-rooms/${id}`, { method: 'DELETE', token }),
+      request(`/workstations/${id}`, { method: 'DELETE', token }),
   },
 
-  gameSessions: {
+  pourBatches: {
     list: (token: string, params?: { page?: number; status?: string }) => {
       const query = new URLSearchParams();
       if (params?.page) query.set('page', String(params.page));
       if (params?.status) query.set('status', params.status);
       const qs = query.toString();
-      return request(`/game-sessions${qs ? `?${qs}` : ''}`, { token });
+      return request(`/pour-batches${qs ? `?${qs}` : ''}`, { token });
     },
     create: (token: string, data: Record<string, unknown>) =>
-      request('/game-sessions', { method: 'POST', body: data, token }),
+      request('/pour-batches', { method: 'POST', body: data, token }),
     update: (token: string, id: string, data: Record<string, unknown>) =>
-      request(`/game-sessions/${id}`, { method: 'PATCH', body: data, token }),
+      request(`/pour-batches/${id}`, { method: 'PATCH', body: data, token }),
     delete: (token: string, id: string) =>
-      request(`/game-sessions/${id}`, { method: 'DELETE', token }),
+      request(`/pour-batches/${id}`, { method: 'DELETE', token }),
   },
 
-  puzzleMaintenance: {
+  equipmentRepair: {
     list: (token: string, params?: { status?: string; priority?: string }) => {
       const query = new URLSearchParams();
       if (params?.status) query.set('status', params.status);
       if (params?.priority) query.set('priority', params.priority);
       const qs = query.toString();
-      return request(`/puzzle-maintenance${qs ? `?${qs}` : ''}`, { token });
+      return request(`/equipment-repairs${qs ? `?${qs}` : ''}`, { token });
     },
     create: (token: string, data: Record<string, unknown>) =>
-      request('/puzzle-maintenance', { method: 'POST', body: data, token }),
+      request('/equipment-repairs', { method: 'POST', body: data, token }),
     update: (token: string, id: string, data: Record<string, unknown>) =>
-      request(`/puzzle-maintenance/${id}`, { method: 'PATCH', body: data, token }),
+      request(`/equipment-repairs/${id}`, { method: 'PATCH', body: data, token }),
     delete: (token: string, id: string) =>
-      request(`/puzzle-maintenance/${id}`, { method: 'DELETE', token }),
+      request(`/equipment-repairs/${id}`, { method: 'DELETE', token }),
   },
 
-  resetChecklist: {
+  curingChecklist: {
     list: (token: string, params?: { page?: number; status?: string }) => {
       const query = new URLSearchParams();
       if (params?.page) query.set('page', String(params.page));
       if (params?.status) query.set('status', params.status);
       const qs = query.toString();
-      return request(`/reset-checklists${qs ? `?${qs}` : ''}`, { token });
+      return request(`/curing-checklists${qs ? `?${qs}` : ''}`, { token });
     },
     create: (token: string, data: Record<string, unknown>) =>
-      request('/reset-checklists', { method: 'POST', body: data, token }),
+      request('/curing-checklists', { method: 'POST', body: data, token }),
     update: (token: string, id: string, data: Record<string, unknown>) =>
-      request(`/reset-checklists/${id}`, { method: 'PATCH', body: data, token }),
+      request(`/curing-checklists/${id}`, { method: 'PATCH', body: data, token }),
     delete: (token: string, id: string) =>
-      request(`/reset-checklists/${id}`, { method: 'DELETE', token }),
+      request(`/curing-checklists/${id}`, { method: 'DELETE', token }),
   },
 
-  propOrders: {
-    list: (token: string, params?: { page?: number; status?: string; propCategory?: string }) => {
+  moldOrders: {
+    list: (token: string, params?: { page?: number; status?: string; moldType?: string }) => {
       const query = new URLSearchParams();
       if (params?.page) query.set('page', String(params.page));
       if (params?.status) query.set('status', params.status);
-      if (params?.propCategory) query.set('propCategory', params.propCategory);
+      if (params?.moldType) query.set('moldType', params.moldType);
       const qs = query.toString();
-      return request(`/prop-orders${qs ? `?${qs}` : ''}`, { token });
+      return request(`/mold-orders${qs ? `?${qs}` : ''}`, { token });
     },
     create: (token: string, data: Record<string, unknown>) =>
-      request('/prop-orders', { method: 'POST', body: data, token }),
+      request('/mold-orders', { method: 'POST', body: data, token }),
     update: (token: string, id: string, data: Record<string, unknown>) =>
-      request(`/prop-orders/${id}`, { method: 'PATCH', body: data, token }),
+      request(`/mold-orders/${id}`, { method: 'PATCH', body: data, token }),
     delete: (token: string, id: string) =>
-      request(`/prop-orders/${id}`, { method: 'DELETE', token }),
+      request(`/mold-orders/${id}`, { method: 'DELETE', token }),
   },
 
-  rateTiers: {
+  workshopRates: {
     list: (token: string, params?: { page?: number; status?: string }) => {
       const query = new URLSearchParams();
       if (params?.page) query.set('page', String(params.page));
       if (params?.status) query.set('status', params.status);
       const qs = query.toString();
-      return request(`/rate-tiers${qs ? `?${qs}` : ''}`, { token });
+      return request(`/workshop-rates${qs ? `?${qs}` : ''}`, { token });
     },
     create: (token: string, data: Record<string, unknown>) =>
-      request('/rate-tiers', { method: 'POST', body: data, token }),
+      request('/workshop-rates', { method: 'POST', body: data, token }),
     update: (token: string, id: string, data: Record<string, unknown>) =>
-      request(`/rate-tiers/${id}`, { method: 'PATCH', body: data, token }),
+      request(`/workshop-rates/${id}`, { method: 'PATCH', body: data, token }),
     delete: (token: string, id: string) =>
-      request(`/rate-tiers/${id}`, { method: 'DELETE', token }),
+      request(`/workshop-rates/${id}`, { method: 'DELETE', token }),
   },
 
-  escapeVenue: {
-    get: (token: string) => request('/escape-venue', { token }),
+  resinStudio: {
+    get: (token: string) => request('/resin-studio', { token }),
     update: (token: string, data: Record<string, unknown>) =>
-      request('/escape-venue', { method: 'PATCH', body: data, token }),
+      request('/resin-studio', { method: 'PATCH', body: data, token }),
   },
 };
 

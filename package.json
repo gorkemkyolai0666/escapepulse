@@ -1,8 +1,8 @@
 {
-  "name": "escapepulse",
+  "name": "resinpulse",
   "version": "1.0.0",
   "private": true,
-  "description": "EscapePulse — Escape room facility operations SaaS",
+  "description": "ResinPulse — Epoxy resin art workshop operations SaaS",
   "scripts": {
     "provision": "tsx scripts/provision-all.ts",
     "provision:railway": "tsx scripts/provision-railway.ts",

@@ -11,14 +11,14 @@ interface User {
   role: string;
 }
 
-interface EscapeVenue {
+interface ResinStudio {
   id: string;
   name: string;
 }
 
 interface AuthState {
   user: User | null;
-  escapeVenue: EscapeVenue | null;
+  resinStudio: ResinStudio | null;
   token: string | null;
   loading: boolean;
   login: (email: string, password: string) => Promise<void>;
@@ -27,7 +27,7 @@ interface AuthState {
     password: string;
     firstName: string;
     lastName: string;
-    escapeVenueName: string;
+    resinStudioName: string;
     phone?: string;
     city?: string;
     state?: string;
@@ -37,11 +37,11 @@ interface AuthState {
 
 const AuthContext = createContext<AuthState | null>(null);
 
-const TOKEN_KEY = 'escapepulse_token';
+const TOKEN_KEY = 'resinpulse_token';
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
-  const [escapeVenue, setEscapeVenue] = useState<EscapeVenue | null>(null);
+  const [resinStudio, setResinStudio] = useState<ResinStudio | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -51,9 +51,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       api.auth
         .me(saved)
         .then((data) => {
-          const result = data as { user: User; escapeVenue: EscapeVenue };
+          const result = data as { user: User; resinStudio: ResinStudio };
           setUser(result.user);
-          setEscapeVenue(result.escapeVenue);
+          setResinStudio(result.resinStudio);
           setToken(saved);
         })
         .catch(() => {
@@ -69,12 +69,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const data = (await api.auth.login({ email, password })) as {
       accessToken: string;
       user: User;
-      escapeVenue: EscapeVenue;
+      resinStudio: ResinStudio;
     };
     localStorage.setItem(TOKEN_KEY, data.accessToken);
     setToken(data.accessToken);
     setUser(data.user);
-    setEscapeVenue(data.escapeVenue);
+    setResinStudio(data.resinStudio);
   }, []);
 
   const register = useCallback(
@@ -83,7 +83,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       password: string;
       firstName: string;
       lastName: string;
-      escapeVenueName: string;
+      resinStudioName: string;
       phone?: string;
       city?: string;
       state?: string;
@@ -91,12 +91,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const data = (await api.auth.register(registerData)) as {
         accessToken: string;
         user: User;
-        escapeVenue: EscapeVenue;
+        resinStudio: ResinStudio;
       };
       localStorage.setItem(TOKEN_KEY, data.accessToken);
       setToken(data.accessToken);
       setUser(data.user);
-      setEscapeVenue(data.escapeVenue);
+      setResinStudio(data.resinStudio);
     },
     [],
   );
@@ -105,11 +105,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     localStorage.removeItem(TOKEN_KEY);
     setToken(null);
     setUser(null);
-    setEscapeVenue(null);
+    setResinStudio(null);
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, escapeVenue, token, loading, login, register, logout }}>
+    <AuthContext.Provider value={{ user, resinStudio, token, loading, login, register, logout }}>
       {children}
     </AuthContext.Provider>
   );
